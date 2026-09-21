@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>20 Clienti · Presentazioni Aziendali 2030</title>
+<style>
+:root{
+  --bg:#ffffff; --bg2:#f5f5f7; --ink:#1d1d1f; --ink2:#424245; --muted:#86868b;
+  --line:#e8e8ed; --card:#ffffff; --radius:22px; --radius-s:14px;
+  --safe-t:env(safe-area-inset-top); --safe-b:env(safe-area-inset-bottom);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Helvetica Neue",Helvetica,Arial,sans-serif;
+  background:var(--bg); color:var(--ink); line-height:1.5;
+  -webkit-font-smoothing:antialiased; padding-bottom:calc(40px + var(--safe-b));
+}
+/* ---------- TOPBAR ---------- */
+.topbar{
+  position:sticky; top:0; z-index:50;
+  background:rgba(255,255,255,.82); backdrop-filter:saturate(180%) blur(20px); -webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid var(--line);
+  padding:calc(10px + var(--safe-t)) 20px 10px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+}
+.topbar .brand{font-size:15px; font-weight:700; letter-spacing:-.02em}
+.topbar .brand span{color:var(--muted); font-weight:500}
+.tb-actions{display:flex; gap:8px}
+.mini-btn{
+  border:1px solid var(--line); background:var(--bg2); color:var(--ink);
+  font-size:12px; font-weight:600; padding:7px 12px; border-radius:999px; cursor:pointer;
+  transition:transform .15s, background .2s; font-family:inherit;
+}
+.mini-btn:active{transform:scale(.94)}
+.mini-btn.dark{background:var(--ink); color:#fff; border-color:var(--ink)}
+/* ---------- HERO ---------- */
+.hero{padding:56px 20px 36px; text-align:center}
+.hero .eyebrow{font-size:13px; font-weight:600; color:var(--muted); letter-spacing:.08em; text-transform:uppercase; margin-bottom:14px}
+.hero h1{
+  font-size:clamp(34px,9vw,56px); font-weight:800; letter-spacing:-.035em; line-height:1.05;
+}
+.hero h1 em{font-style:normal; background:linear-gradient(90deg,#0a84ff,#bf5af2); -webkit-background-clip:text; background-clip:text; color:transparent}
+.hero p{color:var(--ink2); font-size:16px; margin-top:16px; max-width:520px; margin-left:auto; margin-right:auto}
+.stats{display:flex; justify-content:center; gap:0; margin-top:32px; flex-wrap:wrap}
+.stat{padding:0 22px; border-right:1px solid var(--line)}
+.stat:last-child{border-right:none}
+.stat b{display:block; font-size:28px; font-weight:800; letter-spacing:-.03em}
+.stat small{color:var(--muted); font-size:12px; font-weight:600}
+/* ---------- LAYOUT ---------- */
+.wrap{max-width:760px; margin:0 auto; padding:0 16px}
+section.block{margin-top:28px}
+.block-label{font-size:12px; font-weight:700; color:var(--muted); letter-spacing:.09em; text-transform:uppercase; padding:0 6px; margin-bottom:12px}
+/* ---------- ACCORDION GENERICO ---------- */
+.acc{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; margin-bottom:12px; box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.acc-head{
+  width:100%; border:none; background:none; font-family:inherit; cursor:pointer;
+  display:flex; align-items:center; gap:14px; padding:18px 18px; text-align:left;
+}
+.acc-head:active{background:var(--bg2)}
+.chev{margin-left:auto; width:26px; height:26px; flex:0 0 26px; border-radius:50%; background:var(--bg2);
+  display:grid; place-items:center; transition:transform .35s cubic-bezier(.4,0,.2,1), background .2s; color:var(--muted); font-size:14px}
+.acc.open>.acc-head .chev{transform:rotate(90deg); background:var(--ink); color:#fff}
+.acc-body{display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s cubic-bezier(.4,0,.2,1)}
+.acc.open>.acc-body{grid-template-rows:1fr}
+.acc-inner{overflow:hidden}
+.acc-pad{padding:4px 18px 20px}
+/* ---------- BRIEF ---------- */
+.brief-num{width:34px; height:34px; flex:0 0 34px; border-radius:10px; background:var(--ink); color:#fff; font-size:13px; font-weight:700; display:grid; place-items:center}
+.brief-head strong{font-size:16px; font-weight:700; letter-spacing:-.01em; display:block}
+.brief-head small{color:var(--muted); font-size:12.5px; font-weight:500}
+.brief-list{list-style:none}
+.brief-list li{padding:9px 0 9px 20px; position:relative; font-size:14.5px; color:var(--ink2); border-bottom:1px solid var(--line)}
+.brief-list li:last-child{border-bottom:none}
+.brief-list li::before{content:""; position:absolute; left:2px; top:17px; width:6px; height:6px; border-radius:50%; background:var(--ink)}
+.brief-list b{color:var(--ink)}
+/* ---------- COPPIE ---------- */
+.pair-head{display:flex; align-items:center; gap:14px}
+.pair-num{
+  width:40px; height:40px; flex:0 0 40px; border-radius:13px; display:grid; place-items:center;
+  font-size:14px; font-weight:800; background:linear-gradient(135deg,#1d1d1f,#48484a); color:#fff; letter-spacing:-.02em;
+}
+.pair-head strong{font-size:16.5px; font-weight:700; letter-spacing:-.015em; display:block; line-height:1.25}
+.pair-head small{color:var(--muted); font-size:12.5px; font-weight:500}
+/* ---------- CLIENTE ---------- */
+.client{border:1px solid var(--line); border-radius:var(--radius-s); background:var(--bg2); margin:10px 0; overflow:hidden}
+.client.open{background:#fff; box-shadow:0 4px 18px rgba(0,0,0,.07)}
+.client-head{
+  width:100%; border:none; background:none; font-family:inherit; cursor:pointer; text-align:left;
+  display:flex; align-items:center; gap:12px; padding:14px 14px;
+}
+.client-head:active{opacity:.7}
+.c-num{width:32px; height:32px; flex:0 0 32px; border-radius:50%; border:2px solid var(--ink); font-size:12px; font-weight:800; display:grid; place-items:center; letter-spacing:-.02em}
+.client.open .c-num{background:var(--ink); color:#fff}
+.c-info{min-width:0; flex:1}
+.c-info strong{display:block; font-size:15px; font-weight:700; letter-spacing:-.01em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.c-info small{color:var(--muted); font-size:12px; font-weight:500; display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+/* dettagli cliente */
+.meta-grid{display:grid; grid-template-columns:1fr; gap:8px; margin:6px 0 14px}
+.meta{background:var(--bg2); border-radius:12px; padding:11px 13px}
+.meta span{display:block; font-size:10.5px; font-weight:700; color:var(--muted); letter-spacing:.07em; text-transform:uppercase; margin-bottom:2px}
+.meta p{font-size:13.5px; color:var(--ink); font-weight:500}
+.chips{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px}
+.chip{font-size:11.5px; font-weight:700; padding:6px 12px; border-radius:999px; background:var(--ink); color:#fff}
+.chip.soft{background:var(--bg2); color:var(--ink); border:1px solid var(--line)}
+.pal{display:flex; gap:10px; margin-bottom:18px}
+.swatch{flex:1; border-radius:12px; overflow:hidden; border:1px solid var(--line)}
+.swatch .col{height:46px}
+.swatch .lbl{padding:7px 8px; background:#fff}
+.swatch .lbl b{display:block; font-size:10.5px; font-weight:700; color:var(--ink)}
+.swatch .lbl small{font-size:10px; color:var(--muted); font-weight:600; letter-spacing:.02em}
+.h-sez{font-size:12px; font-weight:700; color:var(--muted); letter-spacing:.09em; text-transform:uppercase; margin:20px 0 10px; display:flex; align-items:center; gap:10px}
+.h-sez::after{content:""; flex:1; height:1px; background:var(--line)}
+/* ---------- SLIDE ---------- */
+.slide{border:1px solid var(--line); border-radius:14px; padding:14px; margin-bottom:10px; background:#fff}
+.slide .s-top{display:flex; gap:10px; align-items:flex-start; margin-bottom:8px}
+.s-badge{flex:0 0 auto; font-size:10px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; background:var(--ink); color:#fff; padding:4px 9px; border-radius:7px; margin-top:2px}
+.slide h4{font-size:14.5px; font-weight:700; letter-spacing:-.01em; line-height:1.3}
+.slide ul{list-style:none; margin:0 0 10px}
+.slide ul li{font-size:13.5px; color:var(--ink2); padding:5px 0 5px 18px; position:relative}
+.slide ul li::before{content:""; position:absolute; left:2px; top:13px; width:5px; height:5px; border-radius:50%; background:var(--muted)}
+.vbox{background:var(--bg2); border-radius:10px; padding:10px 12px; margin-bottom:8px}
+.vbox span{display:block; font-size:10px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin-bottom:3px}
+.vbox p{font-size:12.5px; color:var(--ink2); line-height:1.45}
+.lbox{font-size:12px; color:var(--muted); font-style:italic; padding-left:2px}
+.lbox b{font-style:normal; color:var(--ink2); font-weight:700}
+/* ---------- SWOT ---------- */
+.swot{display:grid; grid-template-columns:1fr 1fr; gap:8px}
+.sw{border-radius:12px; padding:11px 12px; border:1px solid var(--line)}
+.sw b{font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; display:block; margin-bottom:5px}
+.sw ul{list-style:none}
+.sw li{font-size:12px; color:var(--ink2); padding:2.5px 0 2.5px 12px; position:relative; line-height:1.35}
+.sw li::before{content:""; position:absolute; left:0; top:9px; width:4px; height:4px; border-radius:50%; background:currentColor; opacity:.5}
+.sw.s{background:#f0f7f1} .sw.s b{color:#2d6a3a}
+.sw.w{background:#fdf1ee} .sw.w b{color:#a63a26}
+.sw.o{background:#eef4fb} .sw.o b{color:#1f5a96}
+.sw.t{background:#fbf6ea} .sw.t b{color:#8a6a1f}
+/* ---------- ROADMAP ---------- */
+.road{list-style:none; position:relative; padding-left:22px}
+.road::before{content:""; position:absolute; left:6px; top:6px; bottom:6px; width:2px; background:var(--line); border-radius:2px}
+.road li{position:relative; padding:7px 0}
+.road li::before{content:""; position:absolute; left:-22px; top:13px; width:12px; height:12px; border-radius:50%; background:#fff; border:3px solid var(--ink)}
+.road b{display:block; font-size:12px; font-weight:800; color:var(--ink)}
+.road span{font-size:13px; color:var(--ink2)}
+/* ---------- NAV PILLS ---------- */
+.pills{display:flex; gap:8px; overflow-x:auto; padding:4px 2px 12px; scrollbar-width:none}
+.pills::-webkit-scrollbar{display:none}
+.pill{flex:0 0 auto; width:44px; height:44px; border-radius:50%; border:1.5px solid var(--line); background:#fff;
+  font-size:13px; font-weight:800; color:var(--ink); cursor:pointer; font-family:inherit; transition:all .2s}
+.pill:active,.pill.active{background:var(--ink); color:#fff; border-color:var(--ink); transform:scale(1.06)}
+/* ---------- FOOTER ---------- */
+footer{text-align:center; margin-top:44px; color:var(--muted); font-size:12px; padding:0 20px}
+footer b{color:var(--ink2)}
+@media(min-width:640px){
+  .meta-grid{grid-template-columns:1fr 1fr}
+  .hero h1{font-size:52px}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">Studio<span> · 20 Clienti 2030</span></div>
+  <div class="tb-actions">
+    <button class="mini-btn" id="btnChiudi">Chiudi tutto</button>
+    <button class="mini-btn dark" id="btnApri">Apri tutto</button>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="eyebrow">Presentazioni Aziendali · Dati 2030</div>
+  <h1>20 clienti.<br><em>10 coppie.</em><br>Zero rumore.</h1>
+  <p>Brief creativo e contenuti completi per PMI italiane. Tocca una coppia, poi un cliente: scheda, palette, 10 slide, SWOT e roadmap.</p>
+  <div class="stats">
+    <div class="stat"><b>20</b><small>CLIENTI</small></div>
+    <div class="stat"><b>200</b><small>SLIDE</small></div>
+    <div class="stat"><b>8</b><small>SETTORI</small></div>
+    <div class="stat"><b>2030</b><small>ANNO DATI</small></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- BRIEF -->
+  <section class="block">
+    <div class="block-label">Parte 1 — Brief creativo</div>
+    <div id="briefBox"></div>
+  </section>
+
+  <!-- NAV 20 -->
+  <section class="block">
+    <div class="block-label">Accesso rapido</div>
+    <div class="pills" id="pills"></div>
+  </section>
+
+  <!-- COPPIE -->
+  <section class="block">
+    <div class="block-label">Parte 2 — Contenuti per 20 clienti</div>
+    <div id="coppie"></div>
+  </section>
+
+</div>
+
+<footer>
+  <b>Studio di marketing e pianificazione strategica per PMI</b><br>
+  Tutti i nomi, le persone, gli indirizzi e i dati sono fittizi · Anno di riferimento 2030 · Contenuti solo in italiano
+</footer>
+
+<script>
+/* ============================================================
+   DATI
+============================================================ */
+const BRIEF = [
+  ["Contesto e missione","Marketing e pianificazione strategica per PMI italiane. Progettiamo piani marketing, analisi SWOT, business plan e presentazioni aziendali. Missione: strategia chiara, visiva, pronta per decidere. Ogni slide nasce da un dato, non da una decorazione."],
+  ["Pubblico di riferimento","PMI italiane (100k–15 M€ di fatturato). Consulenti e freelance di marketing. Startup e team commerciali in lancio, scale-up o raccolta fondi."],
+  ["Deliverable principale","Presentazione Aziendale in 10 slide per cliente, con struttura fissa: obiettivi, problema, soluzione, approccio, dati annuali, dati mensili, sprechi e operatività, ricerca, creazione, reporting."],
+  ["Temi: 8 macro-settori","Sostenibilità & Green (economia circolare, certificazioni) · Startup & Innovazione (scale-up, digitalizzazione) · Made in Italy Tradizionale (food artigianale, sartoria) · Digitale & Creators (SaaS per PMI, content commerce) · Salute & Benessere (nutrizione, wellness tech) · Professioni & Consulenza (strategia, formazione) · Real Estate & Costruzioni (riqualificazione, spazi ibridi) · Creatività & Cultura (design, editoria indipendente)."],
+  ["Direzione creativa — layout","Ampio spazio bianco. Gerarchia chiara: titolo → testo → grafico. Massimo 3 blocchi per slide. Il grafico è contenuto, non decorazione."],
+  ["Direzione creativa — tipografia","Max 2 font. Titoli 24–32 pt, corpo minimo 15 pt. Nessun paragrafo tutto in maiuscolo."],
+  ["Direzione creativa — colore","Palette max 3 colori per progetto. Fondo neutro e chiaro. Contrasto testo/sfondo ≥ 4,5:1 (WCAG AA)."],
+  ["Direzione creativa — testi","Frasi brevi. Titoli descrittivi (max 8 parole). Max 3 bullet per slide. Nessun paragrafo lungo."],
+  ["Formati di contenuto","Visual Data-first: il numero apre la slide, ideale per reporting e investitori. Storytelling / TED Talk: problema → tensione → soluzione → visione, ideale per lanci e rebranding. Trend Map: mappa di tendenze e posizionamento, ideale per export e piani pluriennali."],
+  ["Guida contenuti","Template solo in italiano. Dati ambientati nel 2030. Nomi di aziende, persone e indirizzi fittizi ma plausibili. Divieto assoluto di brand famosi esistenti in Italia."]
+];
+
+const COPPIE = [
+{t:"Food artigianale Made in Italy", s:"Frutta e conserve", c:[
+{n:"01",name:"MeleVal di Sopra",sector:"Frutticoltura e filiera corta",city:"Cles (TN)",addr:"Via del Pomario 14",ref:"Elena Rosatti — Titolare e Direttrice commerciale",
+ctx:"Nel 2030 coltiva 42 ettari di mele a indicazione territoriale in Val di Non e vende a GAS, botteghe e mense scolastiche del Trentino.",
+goal:"Lancio sul mercato",format:"Visual Data-first",
+pal:[["#F8F6F1","Avorio caldo"],["#4A7C59","Verde foglia"],["#C1443C","Rosso mela"]],
+slides:[
+["Obiettivi","Lancio nazionale linea snack “Mela Cruda” entro Q3 2030.","200 punti vendita attivi e 85.000 unità nel primo anno.","Posizionamento: filiera corta, zero additivi, packaging compostabile.","Barre orizzontali — Target punti vendita per canale: GAS 60, Botteghe bio 80, Mense 40, E-commerce 20. Legenda: canali.","Titolo alto a sinistra, grafico centrale, ampio margine destro."],
+["Problema","1.200 tonnellate/anno di mele di piccolo calibro non raggiungono la GDO.","Il conferimento in succo genera margini sotto il 12%.","Nessun prodotto a valore aggiunto per il retail.","Doughnut — Destinazione raccolto: GDO 54%, Succo 28%, Scarto 18%. Colori palette, legenda laterale.","Doughnut a sinistra 60% larghezza, bullet a destra, spazio bianco generoso."],
+["Soluzione","Essiccazione a bassa temperatura (45 °C) direttamente in azienda.","Packaging in cellulosa compostabile certificata.","Prezzo al pubblico 2,90 € per busta da 40 g.","Diagramma a 3 step line-art: Mela → Essiccazione → Packaging.","Tre icone orizzontali con freccia sottile, testo sotto ciascuna."],
+["Approccio","Gen–Feb: test prodotto e focus group.","Mar–Giu: produzione pilota 10.000 unità e distribuzione Trentino-Veneto.","Lug–Set: estensione nazionale e apertura e-commerce.","Timeline roadmap orizzontale, 4 blocchi colorati, asse gen–set 2030.","Timeline centrata verticalmente, nessun elemento sotto, margine 60 px."],
+["Dati annuali","2030: 246.500 € (85.000 unità × 2,90 €).","2031: 412.000 € (+67%, canale Horeca).","2032: 610.000 € (+48%, export area DACH).","Grafico a linee — Ricavi 2030–2032 in migliaia di €. Linea verde, punti rossi, griglia leggera.","Grafico 70% larghezza centrato, valori annotati sui punti."],
+["Dati mensili","Picco settembre–novembre: raccolto e rentrée scolastica.","Calo fisiologico gennaio–febbraio.","Media mensile anno 1: 7.083 unità.","Barre verticali — Unità vendute per mese 2030 (range 4.200–11.500). Verde base, mesi di picco in rosso.","Barre sottili, etichette mesi 15 pt, nessuna legenda."],
+["Sprechi e operatività","Recupero del 18% di scarto come materia prima per lo snack.","Batch di essiccazione da 500 kg: tempi ridotti del 22%.","Logistica condivisa con 3 caseifici della valle.","Barre before/after — Spreco: 1.200 t → 210 t. Ore per ciclo: 14 → 11.","Due coppie di barre affiancate con etichette e una riga di testo sotto."],
+["Ricerca","4 focus group tra Trento, Bolzano, Verona e Milano, 96 partecipanti.","78% interessato a snack di frutta senza additivi.","Benchmark: 3 competitor, nessuno con filiera territoriale certificata.","Torta — Interesse focus group: Molto 42%, Abbastanza 36%, Neutri 14%, No 8%.","Torta a sinistra, bullet a destra, spazio bianco centrale."],
+["Creazione","2 forni a bassa temperatura, capacità 1.000 kg/giorno.","Busta in cellulosa con finestra PLA, stampa flexo 2 colori.","Etichetta con lotto, orto di provenienza e QR code di filiera.","Organigramma di produzione a 3 livelli: Raccolta → Essiccazione → Confezionamento.","Organigramma verticale centrato, bullet in basso, margine laterale 80 px."],
+["Reporting","Settimanale: unità prodotte, tasso di scarto, ordini evasi.","Mensile: ricavi per canale, rotazione a scaffale, NPS.","Trimestrale al board: margine lordo e avanzamento roadmap.","Dashboard stilizzata — 4 card KPI: Unità 7.100, Scarto 2,4%, Ricavi 20.500 €, NPS 61.","Griglia 2×2 di card minimali, titolo in alto, spazio bianco tra card."]],
+swot:{s:["Filiera corta territoriale","Impianto di essiccazione proprietario","Margine lordo 62%"],w:["Capacità produttiva limitata","Brand sconosciuto fuori regione","Nessuna forza vendita dedicata"],o:["Domanda snack naturali +18%/anno","Contributi rurali 2030","Mense scolastiche bio obbligatorie"],t:["Private label della GDO","Costo energia di essiccazione","Stagionalità del raccolto"]},
+road:[["Q1–Q2 2030","Test prodotto e produzione pilota 10.000 unità"],["Q3 2030","Lancio Trentino-Veneto con 80 punti vendita"],["Q1 2031","Estensione nazionale: 200 pdv + e-commerce"],["Q2 2032","Export DACH e ricavi a 610.000 €"]]},
+
+{n:"02",name:"ConfetturaPOP",sector:"Confetture artigianali pop art",city:"Alba (CN)",addr:"Corso della Frutta 7",ref:"Marco Tassinari — Founder e Creative Director",
+ctx:"Nel 2030 produce confetture artigianali con etichette in stile pop art e le distribuisce in 340 botteghe gourmet italiane.",
+goal:"Internazionalizzazione",format:"Storytelling TED Talk",
+pal:[["#FDFCFA","Bianco caldo"],["#D6246E","Magenta pop"],["#F2A922","Giallo agrume"]],
+slides:[
+["Obiettivi","Ingresso in Francia, Germania e Giappone entro Q4 2031.","120 punti vendita esteri e 60.000 vasetti/anno.","La confettura artigianale italiana come oggetto di design.","Trend map — 3 frecce dall’Italia verso Parigi, Berlino e Tokyo, nodi con icona stilizzata.","Mappa centrata, titolo in alto, spazio bianco perimetrale."],
+["Problema","Crescita del segmento gourmet italiano ferma a +3% (2029→2030).","340 botteghe: 92% della capacità distributiva già coperto.","Prezzo medio Italia 6,80 € contro 9,50 € potenziali all’estero.","Linee — Crescita confetture gourmet 2026–2030: Italia piatta (magenta) vs Europa crescente (gialla).","Grafico 75% larghezza, legenda in alto a destra."],
+["Soluzione","Ricette invariate, etichette tradotte in 4 lingue.","Formato export: vasetto 220 g e cofanetto regalo 3 gusti.","Certificazioni BIO UE e JAS per il mercato giapponese.","Diagramma flat a 3 step: Ricetta → Packaging localizzato → Certificazione.","Tre icone orizzontali, una riga di testo sotto ciascuna."],
+["Approccio","2030 H2: Francia, 40 botteghe con distributore di Lione.","2031 H1: Germania, 45 pdv e presenza in fiera a Norimberga.","2031 H2: Giappone, 35 pdv con importatore di Tokyo.","Timeline a 3 blocchi colorati (magenta, giallo, magenta scuro) con periodi annotati.","Timeline centrata, titolo alto, margini generosi."],
+["Dati annuali","2030: 89.000 € export (Francia, secondo semestre).","2031: 312.000 € (3 mercati attivi).","2032: 540.000 € con e-commerce estero.","Barre verticali — Ricavi export 2030–2032 in migliaia di €, barra magenta, valori annotati.","Grafico centrato, nessun testo laterale."],
+["Dati mensili","Picco novembre–dicembre con i cofanetti regalo.","Secondo picco a giugno per i regali aziendali.","Media mensile primo anno Francia: 7.400 €.","Barre verticali — Ricavi per mese (lug 2030–giu 2031). Giallo base, picchi in magenta.","Barre sottili, etichette mesi 15 pt."],
+["Sprechi e operatività","Batch da 800 vasetti: scarto vetro dal 4,2% all’1,1%.","Logistica groupage con 2 aziende alimentari piemontesi.","Etichette stampate on-demand: zero magazzino invenduto.","Barre orizzontali before/after — Spreco vetro 4,2%→1,1%; costo logistica 1,80→1,15 €/vasetto.","Due coppie di barre, etichette chiare, una riga di testo sotto."],
+["Ricerca","2 fiere esplorative internazionali nel 2029.","Survey su 200 buyer esteri: 74% cerca design italiano e artigianalità.","Analisi dazi e normativa di etichettatura per 3 paesi.","Torta — Interesse buyer esteri: Molto alto 38%, Alto 36%, Medio 18%, Basso 8%.","Torta a sinistra, bullet a destra."],
+["Creazione","Traduzione etichette in FR, DE, JP, EN.","Cofanetto in cartone FSC con finestra PLA e chiusura magnetica.","Shooting in 3 set culturali: bistrot, biergarten, ryokan.","Organigramma creativo: Ricetta → Adattamento grafico → Shooting e stampa.","Organigramma verticale centrato, bullet in basso."],
+["Reporting","Mensile: vasetti spediti per paese, sell-through, margini.","Trimestrale: nuovi pdv, rotazione, costi logistici.","Semestrale al board: conto economico export e roadmap.","Dashboard 4 card — Vasetti 5.000, Sell-through 71%, Nuovi pdv 12, Margine 58%.","Griglia 2×2, titolo alto, spazio tra card."]],
+swot:{s:["Identità visiva pop distintiva","Ricette proprietarie","Packaging iconico e riconoscibile"],w:["Nessuna esperienza export","Team di 6 persone","Capacità 40.000 vasetti/mese"],o:["Domanda di design food italiano in crescita","Fiere internazionali 2030","E-commerce cross-border"],t:["Dazi e barriere non tariffarie","Competitor locali premium","Costi logistici internazionali"]},
+road:[["H2 2030","Francia: 40 pdv e distributore attivo"],["H1 2031","Germania: 45 pdv e fiera di Norimberga"],["H2 2031","Giappone: 35 pdv e certificazione JAS"],["2032","120 pdv esteri e ricavi export 540.000 €"]]}]},
+
+{t:"Ristorazione take-away", s:"Pizza e pasta fresca", c:[
+{n:"03",name:"Pizzeria da Guido take-away",sector:"Ristorazione take-away — pizza",city:"Napoli",addr:"Vico della Pizza Antica 23",ref:"Guido Ferrante — Titolare e Pizzaiolo",
+ctx:"Nel 2030 sforna 320 pizze al giorno in 45 m² nel centro storico di Napoli, solo asporto e consegna a domicilio.",
+goal:"Apertura nuova sede",format:"Storytelling TED Talk",
+pal:[["#FAF8F4","Crema chiaro"],["#2B4C7E","Blu forno"],["#E05A2B","Arancio pomodoro"]],
+slides:[
+["Obiettivi","Apertura del secondo punto vendita a Caserta entro marzo 2031.","200 pizze/giorno a regime dopo 6 mesi dall’apertura.","Investimento 120.000 € tra lavori, forno e arredi.","Barre orizzontali — Confronto Napoli vs Caserta: pizze/giorno, fatturato, personale. 3 coppie di barre.","Titolo alto, grafico centrale, bullet sotto."],
+["Problema","Coda media del sabato: 25 minuti e 40 clienti persi.","45 m²: impossibile aggiungere un secondo forno.","Richieste da Caserta e Aversa in crescita, fuori raggio di consegna.","Linea — Clienti persi al mese per saturazione (gen–dic 2030), trend crescente, linea arancio.","Grafico 70% larghezza, titolo alto, spazio bianco inferiore."],
+["Soluzione","Layout standard: forno, banco e cassa in 60 m².","Impasto e lievitazione centralizzati a Napoli, trasporto refrigerato.","Formazione del pizzaiolo di Caserta: 6 settimane in sede madre.","Diagramma flat: Napoli impasto → Trasporto → Caserta cottura e vendita.","Tre icone orizzontali, testo sotto ciascuna."],
+["Approccio","Set 2030: ricerca locale e contratto.","Ott–Dic: lavori, installazione forno e formazione.","Gen 2031: apertura al pubblico.","Feb–Mar: stabilizzazione e marketing di quartiere.","Timeline orizzontale a 5 blocchi, asse set 2030 → mar 2031, colori alternati blu e arancio.","Timeline centrata, titolo alto, margine generoso."],
+["Dati annuali","2030: 285.000 € con la sola sede di Napoli.","2031: 470.000 € con Caserta attiva da marzo.","2032: 590.000 € con entrambe a regime.","Barre verticali — Fatturato 2030–2032 in migliaia di €, barra blu, valori annotati.","Grafico centrato, nessun elemento laterale."],
+["Dati mensili","Picco ottobre–marzo: stagione fredda e comfort food.","Calo luglio–agosto per le ferie.","Media mensile Napoli: 23.750 €.","Barre verticali — Fatturato per mese 2030. Arancio base, mesi di picco in blu.","Barre sottili, etichette 15 pt, titolo alto."],
+["Sprechi e operatività","Impasto centralizzato: scarto farina dal 6% al 2,5%.","Forno a legna con recupero di calore per l’acqua sanitaria.","Packaging in cartone riciclato: plastica ridotta del 40% rispetto al 2028.","Barre before/after — Scarto farina 6%→2,5%; indice plastica 100→60.","Due coppie di barre con etichette e una riga di testo."],
+["Ricerca","3 location valutate; scelta Via Roma 112 a Caserta, 62 m², 8.500 passaggi/giorno.","Survey su 150 residenti: 82% ordinerebbe pizza take-away almeno 2 volte a settimana.","2 competitor diretti in 500 m, nessuno con forno a legna.","Torta — Frequenza d’acquisto dichiarata: 2+/sett 42%, 1/sett 40%, Raramente 12%, Mai 6%.","Torta a sinistra, bullet a destra."],
+["Creazione","Forno a legna da 120 pizze/ora, banco inox, cassa digitale.","Arredi in legno grezzo e insegna dipinta a mano.","Organico: 2 pizzaioli e 1 banconista, formazione 6 settimane.","Organigramma sede Caserta: Titolare → Pizzaiolo 1 + Pizzaiolo 2 → Banconista.","Organigramma verticale centrato, bullet in basso."],
+["Reporting","Giornaliero: pizze sfornate, attesa media, spreco di impasto.","Mensile: fatturato, food cost, recensioni medie.","Trimestrale: confronto Napoli vs Caserta e margine operativo.","Dashboard 4 card — Pizze 185/g, Attesa 9 min, Food cost 31%, Rating 4,7.","Griglia 2×2, titolo alto, spazio tra card."]],
+swot:{s:["Forno a legna e ricetta trentennale","Fedeltà clienti 87%","Margine lordo 68%"],w:["Locale troppo piccolo","Dipendenza dal titolare","Consegna non strutturata"],o:["Domanda insoddisfatta a Caserta","Trend pizza artigianale","Contributi al commercio 2030"],t:["Costo mozzarella in aumento","Nuove aperture concorrenti","Normative sulle emissioni dei forni"]},
+road:[["Set–Nov 2030","Contratto, lavori e installazione forno"],["Gen 2031","Apertura sede di Caserta"],["Giu 2031","200 pizze/giorno a regime"],["2032","Fatturato consolidato 590.000 €"]]},
+
+{n:"04",name:"PastaViva take-away",sector:"Pasta fresca artigianale take-away",city:"Bologna",addr:"Via delle Sfogliatine 9",ref:"Chiara Bentivoglio — Founder e Responsabile produzione",
+ctx:"Nel 2030 produce 180 kg di pasta fresca al giorno in un laboratorio di 70 m², venduti al banco e su 3 piattaforme di consegna.",
+goal:"Digitalizzazione",format:"Visual Data-first",
+pal:[["#FCFBF8","Bianco farina"],["#D4A017","Giallo tuorlo"],["#3B7A3F","Verde basilico"]],
+slides:[
+["Obiettivi","Gestionale integrato per banco, delivery ed e-commerce entro dicembre 2030.","App loyalty con raccolta punti e ordini ricorrenti.","Produzione predittiva con AI: invenduto ridotto del 30%.","Barre orizzontali — Avanzamento target 3 progetti: Gestionale, App, AI, tutti al 100% a fine 2030.","Titolo alto, tre barre orizzontali, bullet sotto."],
+["Problema","Ordini a voce e su fogli: 15 minuti persi ogni ora.","Invenduto medio 40 kg/giorno, il 22% della produzione.","Nessuna traccia dei clienti: fidelizzazione assente.","Doughnut — Produzione giornaliera: Venduto 78% (verde), Invenduto 22% (giallo).","Doughnut a sinistra, bullet a destra, spazio bianco centrale."],
+["Soluzione","Gestionale cloud: ordini, magazzino e produzione in una dashboard.","App “PastaViva Club”: loyalty, pre-ordine e notifiche.","Modulo AI su storico 24 mesi, meteo ed eventi locali.","Diagramma flat a 3 blocchi: Gestionale → App → AI.","Tre icone orizzontali, testo sotto ciascuna."],
+["Approccio","Set–Ott 2030: gestionale e ordini digitali.","Nov 2030: lancio app loyalty e pre-ordine.","Dic 2030: attivazione del modulo AI predittivo.","Timeline orizzontale a 3 blocchi, asse set–dic 2030, colori alternati giallo e verde.","Timeline centrata, titolo alto, margini generosi."],
+["Dati annuali","Invenduto annuo: da 14.600 kg a 10.200 kg (-30%).","Scontrino medio atteso +18% grazie alla loyalty.","Ritorno sull’investimento del progetto: 14 mesi.","Linee — Invenduto mensile 2029 vs 2031 post-AI: due linee, gialla (prima) e verde (dopo), asse Y in kg.","Grafico 75% larghezza, legenda in alto."],
+["Dati mensili","Banco 55% degli ordini, delivery 30%, e-commerce 15%.","Venerdì e sabato +40% sulla media settimanale.","Media giornaliera: 142 ordini.","Barre verticali — Ordini per giorno della settimana. Verde base, venerdì e sabato in giallo.","Barre sottili, etichette giorni 15 pt."],
+["Sprechi e operatività","Produzione calibrata sulla domanda prevista dall’AI.","Invenduto residuo donato a 2 mense sociali (accordo 2030).","Amministrazione digitale: 15 minuti/ora recuperati.","Barre before/after — Invenduto 40→28 kg/giorno; tempo admin 60→45 min/giorno.","Due coppie di barre con etichette e una riga sotto."],
+["Ricerca","Analisi comparativa di 5 gestionali per food artigianale.","Survey su 200 clienti: 71% userebbe l’app per pre-ordine e punti.","Benchmark su 3 laboratori già digitalizzati a Bologna.","Torta — Survey clienti: Userebbe l’app 71%, Indifferente 18%, Non interessato 11%.","Torta a sinistra, bullet a destra."],
+["Creazione","Sviluppo app in 8 settimane con team esterno.","Integrazione con le 3 piattaforme di consegna esistenti.","Formazione dello staff: 2 sessioni da 3 ore.","Organigramma di progetto: Chiara → Sviluppo app + Integrazioni → Formazione staff.","Organigramma verticale, bullet in basso, margine 80 px."],
+["Reporting","Settimanale: ordini per canale, invenduto, uptime del gestionale.","Mensile: utenti app, redemption loyalty, margine.","Trimestrale: ROI della digitalizzazione e modulo AI.","Dashboard 4 card — Ordini 142/g, Invenduto 28 kg, Utenti app 1.850, ROI 14 mesi.","Griglia 2×2, titolo alto, spazio tra card."]],
+swot:{s:["Prodotto artigianale riconosciuto","Location centrale a Bologna","Margine lordo 58%"],w:["Gestione ordini manuale","Invenduto al 22%","Nessun CRM clienti"],o:["Domanda pasta fresca +12%/anno","Contributi digitalizzazione PMI 2030","Trend loyalty digitale"],t:["Aggregatori delivery aggressivi","Costo licenze software","Resistenza al cambiamento dello staff"]},
+road:[["Set–Ott 2030","Gestionale attivo e ordini digitali"],["Nov 2030","Lancio app PastaViva Club"],["Dic 2030","Modulo AI predittivo attivo"],["2031–2032","Invenduto -30% e scontrino +18%"]]}]},
+
+{t:"Brand di abbigliamento", s:"Streetwear e kidswear", c:[
+{n:"05",name:"StradaLibera",sector:"Streetwear italiano",city:"Milano",addr:"Via dei Tessitori 18",ref:"Andrea Riva — Founder e Amministratore Delegato",
+ctx:"Nel 2030 StradaLibera vende streetwear prodotto in Lombardia con 2 negozi a Milano e un e-commerce che genera il 61% dei ricavi.",
+goal:"Crescita e scale-up",format:"Trend Map",
+pal:[["#F7F7F5","Grigio perla"],["#1C1C1E","Nero grafite"],["#00B368","Verde elettrico"]],
+slides:[
+["Obiettivi","Raddoppio del fatturato: da 2,1 a 4,2 M€ entro il 2032.","Da 2 a 5 negozi monomarca nelle principali città.","Struttura manageriale completa entro fine 2031.","Barre orizzontali — Ricavi per canale 2030 vs target 2032: E-commerce, Negozi, Wholesale. Coppie di barre.","Titolo alto, grafico centrale, bullet sotto."],
+["Problema","Capacità produttiva saturata: liste d’attesa di 6 settimane sui drop.","Struttura a 4 persone: nessun responsabile operations.","Crescita organica che rallenta: +9% nel 2030 contro +31% del 2028.","Linee — Crescita ricavi anno su anno 2026–2030: 44%, 31%, 22%, 14%, 9%. Trend decrescente, linea nera.","Grafico 75% larghezza, valori annotati sui punti."],
+["Soluzione","Nuovo laboratorio conto terzi certificato in Veneto.","Organico da 4 a 14 persone con 3 figure manageriali.","Calendario drop mensili e linea continuativa basic.","Diagramma a 3 blocchi flat: Produzione → Organizzazione → Prodotto.","Tre icone orizzontali con testo sotto ciascuna."],
+["Approccio","2030 H2: contrattualizzazione produttori e recruiting.","2031: aperture di Torino e Bologna, potenziamento e-commerce.","2032: aperture di Roma e Firenze, linea export UE.","Timeline orizzontale a 3 blocchi, asse 2030→2032, alternanza nero e verde.","Timeline centrata, titolo alto, nessun testo sotto."],
+["Dati annuali","2030: 2,1 M€ di ricavi.","2031: 3,0 M€ (+43%, 2 nuovi negozi).","2032: 4,2 M€ (+40%, 5 negozi e export UE).","Barre verticali — Ricavi 2030–2032 in M€, barre nere, valori annotati in verde.","Grafico centrato, nessun elemento laterale."],
+["Dati mensili","Picchi in corrispondenza dei drop: marzo e settembre.","Novembre–dicembre: +55% per regalistica.","Media mensile 2030: 175.000 €.","Barre verticali — Ricavi per mese 2030. Grigio base, mesi drop in verde, festività in nero.","Barre sottili, etichette mesi 15 pt."],
+["Sprechi e operatività","Produzione su pre-ordine per il 40% dei capi: invenduto -35%.","Resi rigenerati in capsule “Second Drop” a prezzo ridotto.","Imballaggi riutilizzabili con reso gratuito del pack.","Barre before/after — Invenduto 11%→7,2%; costo pack 0,90→0,55 €/ordine.","Due coppie di barre, etichette, una riga di testo."],
+["Ricerca","Analisi su 1.400 clienti e-commerce: riacquisto medio 2,7 volte/anno.","Survey community: 68% chiede negozi fisici fuori Milano.","Benchmark su 4 brand streetwear europei in scale-up.","Torta — Preferenza canale futuro: Negozio 38%, Online 44%, Pop-up 18%.","Torta a sinistra, bullet a destra, spazio bianco centrale."],
+["Creazione","Nuovo organigramma con COO, Retail Manager, E-com Manager.","Produzione: 2 partner veneti, capacità 8.000 capi/mese.","Piano editoriale drop con countdown e prenotazioni.","Organigramma aziendale a 3 livelli: AD → COO/Retail/E-com → Team operativi (14 persone).","Organigramma centrato, bullet in basso, margine 80 px."],
+["Reporting","Settimanale: vendite per drop, sell-through, resi.","Mensile: ricavi per canale, CAC, margine lordo.","Trimestrale al board: P&L, avanzamento aperture, cassa.","Dashboard 4 card — Sell-through 74%, CAC 12 €, Ricavi M€ 0,21, Cassa 380k €.","Griglia 2×2, titolo alto, spazio tra card."]],
+swot:{s:["Community fedele e organica","E-commerce al 61% dei ricavi","Margine lordo 71%"],w:["Team di 4 persone","Capacità produttiva satura","Dipendenza dai drop"],o:["Domanda streetwear italiano +16%/anno","Negozi sfitti a canoni calmierati","Export UE senza dazi"],t:["Fast fashion che copia i codici","Costo pubblicitario in aumento","Saturazione del canale social"]},
+road:[["H2 2030","Nuovi produttori e recruiting manageriale"],["2031","Negozi a Torino e Bologna, 3,0 M€"],["2032","Roma e Firenze, export UE, 4,2 M€"],["2033","Valutazione round di investimento"]]},
+
+{n:"06",name:"PiccoloFilo",sector:"Abbigliamento bambini 0–10 anni",city:"Firenze",addr:"Via del Ricamino 5",ref:"Giulia Nencini — Founder e Direttrice creativa",
+ctx:"Nel 2030 PiccoloFilo disegna abbigliamento 0–10 anni in cotone rigenerato prodotto tra Prato e Firenze, con 120.000 € di ricavi e una community di 28.000 genitori.",
+goal:"Raccolta fondi",format:"Storytelling TED Talk",
+pal:[["#FAF7F2","Panna"],["#5B8DB8","Celeste filo"],["#E8836B","Corallo tenue"]],
+slides:[
+["Obiettivi","Round di raccolta da 750.000 € in equity entro giugno 2031.","Destinazione: 40% prodotto, 30% marketing, 30% team.","Valutazione pre-money 3,2 M€ con multipli di settore.","Doughnut — Destinazione del round: Prodotto 40%, Marketing 30%, Team 30%. Colori palette, legenda laterale.","Doughnut a sinistra, bullet a destra, spazio bianco generoso."],
+["Problema","Domanda superiore alla capacità: 3.000 capi in lista d’attesa.","Nessuna liquidità per assumere una produzione dedicata.","Il mercato kidswear sostenibile cresce, ma richiede scala.","Linee — Lista d’attesa capi 2028–2030: 400, 1.500, 3.000. Trend crescente, linea corallo.","Grafico 70% larghezza, titolo alto."],
+["Soluzione","Contratto di esclusiva con 2 maglifici di Prato.","Linea continuativa 0–4 anni ad alta rotazione.","Community di genitori come canale di vendita diretto.","Diagramma flat: Raccolta → Produzione dedicata → Linea continuativa.","Tre icone orizzontali, testo sotto ciascuna."],
+["Approccio","Q4 2030: data room e teaser a 15 investitori.","Q1 2031: incontri e due diligence.","Q2 2031: closing del round a 750.000 €.","Timeline orizzontale a 3 blocchi, asse ott 2030 → giu 2031, colori alternati celeste e corallo.","Timeline centrata, titolo alto, margini generosi."],
+["Dati annuali","2030: 120.000 € di ricavi con margine lordo 64%.","2031: 310.000 € previsti post-round.","2032: 640.000 € con linea continuativa a regime.","Barre verticali — Ricavi 2030–2032 in migliaia di €, barra celeste, valori annotati.","Grafico centrato, nessun elemento laterale."],
+["Dati mensili","Picchi a settembre (rientro scolastico) e dicembre (regali).","Calo a luglio–agosto.","Media mensile 2030: 10.000 €.","Barre verticali — Ricavi per mese 2030. Celeste base, mesi di picco in corallo.","Barre sottili, etichette mesi 15 pt."],
+["Sprechi e operatività","Cotone rigenerato di Prato: 0 fibre vergini nelle linee base.","Sovrapproduzione azzerata dal modello su prenotazione.","Packaging in carta seme piantabile: zero plastica.","Barre before/after — Invenduto 9%→2% (su prenotazione); plastica pack 100→0 (indice).","Due coppie di barre con etichette e una riga sotto."],
+["Ricerca","Survey su 600 genitori: 81% paga di più il kidswear sostenibile.","Mercato kidswear sostenibile Italia: +21% medio annuo 2027–2030.","Benchmark su 3 round simili chiusi nel 2029.","Torta — Disponibilità a pagare un premium: Sì oltre +20% 34%, Sì fino a +20% 47%, No 19%.","Torta a sinistra, bullet a destra."],
+["Creazione","Data room: business plan, metriche community, contratti.","Pitch deck di 14 slide per investitori.","Assunzione post-round: responsabile produzione e growth marketer.","Organigramma attuale vs post-round: 3 persone → 7 persone con nuove funzioni evidenziate.","Due organigrammi affiancati, nuove figure in corallo."],
+["Reporting","Mensile agli investitori: ricavi, CAC, retention, cassa.","Trimestrale: avanzamento uso fondi per voce.","KPI di community: iscritti, tasso di conversione, referral.","Dashboard 4 card — Ricavi 10k €/mese, CAC 9 €, Retention 41%, Community 28.000.","Griglia 2×2, titolo alto, spazio tra card."]],
+swot:{s:["Materiale 100% rigenerato","Community di 28.000 genitori","Margine lordo 64%"],w:["Capacità produttiva artigianale","Team di 3 persone","Cassa limitata"],o:["Kidswear sostenibile +21%/anno","Distretto di Prato accessibile","Investitori attenti all’impatto"],t:["Brand grandi che entrano nel segmento","Costo del cotone rigenerato","Regole UE su dichiarazioni ambientali"]},
+road:[["Q4 2030","Data room e contatto con 15 investitori"],["Q2 2031","Closing round 750.000 €"],["Q3 2031","Linea continuativa 0–4 anni a regime"],["2032","Ricavi 640.000 € e break-even"]]}]},
+
+{t:"Sartoria su misura moderna", s:"Digital tailoring e camiceria", c:[
+{n:"07",name:"MisuraVera",sector:"Sartoria su misura con presa misure digitale",city:"Fermo (FM)",addr:"Corso della Sartoria 33",ref:"Luca Vitali — Fondatore e Maestro sarto",
+ctx:"Nel 2030 MisuraVera unisce sartoria marchigiana e scansione corporea 3D: 480 capi su misura l’anno consegnati in tutta Italia.",
+goal:"Recruiting",format:"Visual Data-first",
+pal:[["#F8F6F2","Lino chiaro"],["#2F3E46","Grigio antracite"],["#B08D57","Ottone"]],
+slides:[
+["Obiettivi","Assumere 6 figure in 12 mesi: 3 sarti junior, 1 modellista 3D, 2 customer tailor.","Academy interna di sartoria digitale con 8 allievi/anno.","Età media del team da 54 a 38 anni entro il 2032.","Barre orizzontali — Fabbisogno di personale per ruolo: Sarti junior 3, Modellista 1, Customer tailor 2. Valori in unità.","Titolo alto, grafico centrale, bullet sotto."],
+["Problema","Età media dei sarti: 54 anni, nessun ricambio in arrivo.","Ordini rifiutati: 90 capi/anno per mancanza di mani.","Attesa media cliente salita a 11 settimane.","Linee — Ordini rifiutati per anno 2027–2030: 20, 45, 70, 90. Trend crescente, linea antracite.","Grafico 75% larghezza, valori annotati."],
+["Soluzione","Academy MisuraVera: 6 mesi di formazione retribuita.","Presa misure 3D che dimezza i tempi di prova.","Partnership con 2 istituti tecnici marchigiani.","Diagramma a 3 step: Academy → Affiancamento → Autonomia produttiva.","Tre icone orizzontali, testo sotto ciascuna."],
+["Approccio","Q1 2031: apertura bando academy e selezioni.","Q2–Q3 2031: primo ciclo formativo con 8 allievi.","Q4 2031: inserimento dei 3 migliori come sarti junior.","Timeline orizzontale a 3 blocchi, asse gen–dic 2031, colori alternati antracite e ottone.","Timeline centrata, titolo alto."],
+["Dati annuali","2030: 480 capi prodotti, 384.000 € di ricavi.","2031: 610 capi con 2 inserimenti anticipati.","2032: 800 capi a organico completo, 640.000 €.","Barre verticali — Capi prodotti 2030–2032, barra ottone, valori annotati.","Grafico centrato, nessun testo laterale."],
+["Dati mensili","Picchi marzo–maggio (cerimonie) e ottobre (mezza stagione).","Agosto: chiusura e manutenzione laboratorio.","Media mensile 2030: 40 capi.","Barre verticali — Capi consegnati per mese 2030. Antracite base, picchi in ottone.","Barre sottili, etichette mesi 15 pt."],
+["Sprechi e operatività","Taglio assistito da modello 3D: scarto tessuto dal 12% al 6%.","Prove virtuali: trasferte ridotte del 70%.","Ritagli recuperati in linea di accessori (cravatte, taschini).","Barre before/after — Scarto tessuto 12%→6%; trasferte prova 20→6 al mese.","Due coppie di barre, etichette, una riga sotto."],
+["Ricerca","Analisi su 12 sartorie italiane: solo 2 hanno under 35 in organico.","Survey 200 clienti: attesa accettabile massima 5 settimane.","Studio retributivo di settore per 3 profili sartoriali digitali.","Torta — Candidati under 35 sul totale domande: 61%, resto over 35. Legenda per fasce.","Torta a sinistra, bullet a destra."],
+["Creazione","Piano formativo academy: 480 ore tra taglio, cucito e software 3D.","Affiancamento maestro-allievo con rapporto 1:2.","Percorso di carriera a 3 livelli con verifiche semestrali.","Organigramma post-recruiting: Maestro sarto → 3 sarti senior + 3 junior → Modellista 3D + 2 customer tailor.","Organigramma verticale centrato, nuovi ruoli in ottone."],
+["Reporting","Mensile: candidature, colloqui, inserimenti, costo per assunzione.","Trimestrale: produttività capi/sarto, tempo medio consegna.","Semestrale: valutazione allievi academy e retention.","Dashboard 4 card — Candidature 140, Inseriti 4/6, Capi/sarto 13/mese, Attesa 7 sett.","Griglia 2×2, titolo alto, spazio tra card."]],
+swot:{s:["Presa misure 3D proprietaria","Saper fare sartoriale marchigiano","Ticket medio 800 €"],w:["Età media del team 54 anni","Ordini rifiutati per capacità","Attesa cliente 11 settimane"],o:["Rinascimento del su misura under 40","Istituti tecnici del distretto","Turismo sartoriale esperienziale"],t:["Carenza strutturale di sarti","Costo del tessuto in aumento","Concorrenza del su misura estero online"]},
+road:[["Q1 2031","Bando academy e selezioni"],["Q3 2031","Primo ciclo formativo completato"],["Q4 2031","3 sarti junior inseriti in organico"],["2032","800 capi/anno e attesa sotto 5 settimane"]]},
+
+{n:"08",name:"Camiceria Setalago",sector:"Camiceria sartoriale su misura",city:"Como",addr:"Via della Seta 21",ref:"Martina Cattaneo — Amministratrice Delegata",
+ctx:"Nel 2030 la camiceria lavora sete e cotoni del distretto comasco per 350 clienti storici, ma il brand è percepito come datato nonostante un prodotto eccellente.",
+goal:"Rebranding",format:"Storytelling TED Talk",
+pal:[["#FBFAF7","Bianco seta"],["#3D5A80","Blu lago"],["#293241","Notte comasco"]],
+slides:[
+["Obiettivi","Nuova identità di brand entro giugno 2031.","Ridurre l’età media del cliente da 58 a 42 anni.","Portare l’e-commerce dal 9% al 30% dei ricavi nel 2032.","Barre orizzontali — Prima/dopo rebranding: età media cliente 58→42, quota e-commerce 9%→30%.","Titolo alto, grafico centrale, bullet sotto."],
+["Problema","Percezione datata: il 63% degli under 40 non conosce il brand.","Identità visiva ferma al 1998.","Comunicazione assente sui canali digitali.","Doughnut — Notorietà per fascia d’età: over 55 alta 71%, 40–54 media 38%, under 40 bassa 12%. Legenda per fasce.","Doughnut a sinistra, bullet a destra."],
+["Soluzione","Nuovo nome visivo, logo e palette ispirati al lago di Como.","Camicia “Sette Pieghe”: capsule contemporanea su misura.","Presidio digitale con contenuti di bottega e storytelling.","Diagramma flat: Identità → Prodotto capsule → Canali digitali.","Tre icone orizzontali, testo sotto ciascuna."],
+["Approccio","Q1 2031: ricerca qualitativa e concept creativo.","Q2 2031: nuova identità, shooting e capsule.","Q3 2031: lancio pubblico e nuovo e-commerce.","Timeline orizzontale a 3 blocchi, asse gen–set 2031, alternanza blu lago e notte.","Timeline centrata, titolo alto, margini generosi."],
+["Dati annuali","2030: 420.000 € di ricavi, e-commerce al 9%.","2031: 486.000 € (+16%, effetto lancio).","2032: 605.000 € con e-commerce al 30%.","Linee — Ricavi 2030–2032 con linea blu e quota e-commerce in evidenza, valori in migliaia di €.","Grafico 75% larghezza, legenda in alto."],
+["Dati mensili","Picchi a maggio e novembre (cerimonie e regali).","Agosto: rallentamento fisiologico.","Media mensile 2031 prevista: 40.500 €.","Barre verticali — Ricavi per mese 2031. Blu chiaro base, picchi in blu notte.","Barre sottili, etichette mesi 15 pt."],
+["Sprechi e operatività","Tessuti di fine pezza del distretto nella capsule: scarto -28%.","Appuntamenti digitali di preselezione: tempi di prova -35%.","Archivio digitale dei modelli: zero rilievi cartacei duplicati.","Barre before/after — Scarto di pezza 15%→10,8%; durata prova 45→29 min.","Due coppie di barre con etichette."],
+["Ricerca","12 interviste in profondità a clienti storici e prospect under 40.","Analisi di 5 rebranding di sartorie europee riusciti.","Test di 3 concept visivi su panel di 120 persone.","Torta — Concept preferito dal panel: Lago contemporaneo 54%, Heritage 29%, Minimal 17%.","Torta a sinistra, bullet a destra."],
+["Creazione","Logo, palette, tipografia e tono di voce nuovi.","Shooting in 2 location lacustri con clienti reali.","Nuovo sito con configuratore di camicia su misura.","Organigramma di progetto: AD → Agenzia creativa + Fotografo + Sviluppo web → Lancio.","Organigramma verticale centrato, bullet in basso."],
+["Reporting","Mensile: notorietà assistita, traffico sito, conversioni.","Trimestrale: età media nuovi clienti, ricavi per canale.","Semestrale: brand equity e soddisfazione clienti storici.","Dashboard 4 card — Notorietà under 40 31%, Visite/mese 12.400, Conversione 2,8%, Età media nuovi 44.","Griglia 2×2, titolo alto, spazio tra card."]],
+swot:{s:["Prodotto sartoriale d’eccellenza","Distretto serico di Como","350 clienti storici fedeli"],w:["Brand percepito come datato","Digitale al 9%","Comunicazione assente"],o:["Rinascimento del made in Como","Configuratori su misura online","Turismo del lago ad alto spendente"],t:["Camicerie storiche concorrenti","Costo della seta in aumento","Attenzione superficiale ai rebranding"]},
+road:[["Q1 2031","Ricerca e concept creativo"],["Q2 2031","Nuova identità e capsule Sette Pieghe"],["Q3 2031","Lancio pubblico e nuovo e-commerce"],["2032","E-commerce al 30% e ricavi 605.000 €"]]}]},
+
+{t:"Moda circolare e rigenerazione", s:"Seconda vita e sneakers rigenerate", c:[
+{n:"09",name:"Rifilo",sector:"Riciclo abiti e rigenerazione tessile",city:"Prato (PO)",addr:"Via del Tessuto Rigenerato 8",ref:"Samuele Betti — Amministratore Delegato",
+ctx:"Nel 2030 Rifilo rigenera 900 tonnellate di abiti usati l’anno nel distretto di Prato e vende fibra meccanica riciclata a filature e tessiture.",
+goal:"Partnership B2B",format:"Trend Map",
+pal:[["#F6F5F0","Ecrù"],["#6B8F71","Verde rigenerato"],["#D9A441","Ocra lana"]],
+slides:[
+["Obiettivi","3 contratti di fornitura pluriennali con aziende di moda entro il 2032.","Quota ricavi da partnership B2B dal 35% al 60%.","Fibra tracciata con passaporto digitale del materiale.","Trend map — Nodo centrale Rifilo collegato a 3 nodi partner (filatura, tessitura, brand) con frecce di fornitura.","Mappa centrata, titolo in alto, spazio bianco perimetrale."],
+["Problema","Vendita spot della fibra: prezzi volatili e margini instabili.","Nessun contratto oltre i 12 mesi con gli acquirenti.","I brand chiedono tracciabilità che oggi è parziale.","Linee — Volatilità prezzo fibra 2027–2030: oscillazioni tra 1,60 e 2,90 €/kg. Linea ocra su griglia leggera.","Grafico 75% larghezza, valori annotati su minimi e massimi."],
+["Soluzione","Offerta “Fibra Firmata”: lotti tracciati con passaporto digitale.","Contratti pluriennali a prezzo indicizzato e volumi garantiti.","Servizio di co-sviluppo tessuti con le tessiture partner.","Diagramma a 3 blocchi: Raccolta certificata → Fibra firmata → Contratto pluriennale.","Tre icone orizzontali, testo sotto ciascuna."],
+["Approccio","2030 H2: qualificazione di 12 potenziali partner.","2031: 3 progetti pilota di co-sviluppo.","2032: firma dei contratti pluriennali e scalabilità.","Timeline orizzontale a 3 blocchi, asse 2030→2032, alternanza verde e ocra.","Timeline centrata, titolo alto."],
+["Dati annuali","2030: 1,9 M€ di ricavi, B2B contrattualizzato al 35%.","2031: 2,4 M€ con 3 progetti pilota.","2032: 3,1 M€ con quota B2B al 60%.","Barre verticali — Ricavi 2030–2032 in M€ con porzione B2B evidenziata in verde, barra stacked.","Grafico centrato, legenda in alto."],
+["Dati mensili","Raccolta costante: 75 tonnellate/mese in media.","Picco di conferimenti a settembre (cambio armadi).","Fatturato mensile medio 2030: 158.000 €.","Barre verticali — Tonnellate raccolte per mese 2030. Verde base, settembre in ocra.","Barre sottili, etichette mesi 15 pt."],
+["Sprechi e operatività","Resa di rigenerazione dal 68% al 79% con nuova cardatura.","Sfridi di cardatura trasformati in imbottiture per arredo.","Logistica inversa con i raccoglitori comunali: trasporti -18%.","Barre before/after — Resa rigenerazione 68%→79%; costi trasporto indice 100→82.","Due coppie di barre con etichette."],
+["Ricerca","Mappatura di 40 potenziali partner tra filature, tessiture e brand.","Survey su 25 responsabili acquisti: 84% richiede passaporto digitale.","Analisi normative UE 2030 su responsabilità estesa del tessile.","Torta — Interesse partnership: Alto 46%, Medio 38%, Basso 16% su 40 aziende mappate.","Torta a sinistra, bullet a destra."],
+["Creazione","Piattaforma di tracciabilità del lotto dalla raccolta al filato.","Capitolato tecnico condiviso con i 3 partner pilota.","Team dedicato B2B: 1 responsabile e 2 tecnici di vendita.","Organigramma B2B: AD → Responsabile partnership → 2 tecnici di vendita + laboratorio qualità.","Organigramma verticale, nuovi ruoli in ocra."],
+["Reporting","Mensile: volumi per partner, prezzi medi, margini per lotto.","Trimestrale: avanzamento pilota e conversione a contratto.","Semestrale: quota B2B, retention partner, investimenti.","Dashboard 4 card — Tonnellate/mese 75, Prezzo medio 2,20 €/kg, Partner pilota 3, Quota B2B 41%.","Griglia 2×2, titolo alto, spazio tra card."]],
+swot:{s:["Distretto di Prato e saper fare","900 t/anno di capacità","Fibra meccanica a km zero"],w:["Vendita spot prevalente","Tracciabilità parziale","Margine volatile"],o:["Normative UE sulla circolarità","Domanda di fibra riciclata +24%/anno","Passaporto digitale dei materiali"],t:["Concorrenza estera a basso costo","Qualità variabile del raccolto","Costo energetico della cardatura"]},
+road:[["H2 2030","Qualificazione di 12 potenziali partner"],["2031","3 progetti pilota di co-sviluppo"],["2032","Contratti pluriennali, B2B al 60%"],["2033","Secondo impianto di cardatura"]]},
+
+{n:"10",name:"PassoZero",sector:"Sneakers e accessori da scarti tessili",city:"Montegranaro (FM)",addr:"Via dell’Artigiano 40",ref:"Sara Mancini — Founder e Direttrice prodotto",
+ctx:"Nel 2030 PassoZero produce sneakers rigenerate da scarti del distretto calzaturiero marchigiano: 9.000 paia l’anno vendute online e in 40 negozi.",
+goal:"Certificazione di sostenibilità",format:"Visual Data-first",
+pal:[["#F7F6F3","Grigio pietra"],["#2D3142","Blu notte"],["#EF8354","Corallo scarto"]],
+slides:[
+["Obiettivi","Ottenere la certificazione di prodotto circolare entro dicembre 2031.","Minimo 70% di materiali rigenerati certificato per modello.","Accesso a bandi e gare riservate ai prodotti certificati.","Barre orizzontali — Contenuto rigenerato per modello 2030 vs requisito 70%: 3 modelli a confronto.","Titolo alto, grafico centrale, bullet sotto."],
+["Problema","Dichiarazioni ambientali non verificate: rischio normativo UE 2030.","Gare e bandi richiedono certificazioni che PassoZero non ha.","I retailer chiedono prove di circolarità documentate.","Doughnut — Materiali per paio oggi: Rigenerati 58%, Vergini riciclabili 27%, Vergini 15%. Requisito target 70%.","Doughnut a sinistra, bullet a destra."],
+["Soluzione","Percorso di certificazione con ente terzo accreditato.","Catena di custodia documentata degli scarti del distretto.","Etichetta digitale con composizione verificata per lotto.","Diagramma a 3 step: Audit materiali → Catena di custodia → Certificazione.","Tre icone orizzontali, testo sotto ciascuna."],
+["Approccio","Q1–Q2 2031: audit interno e adeguamento processi.","Q3 2031: ispezione dell’ente certificatore.","Q4 2031: rilascio certificazione e lancio etichetta digitale.","Timeline orizzontale a 4 blocchi, asse gen–dic 2031, alternanza blu notte e corallo.","Timeline centrata, titolo alto."],
+["Dati annuali","2030: 540.000 € di ricavi, 9.000 paia vendute.","2031: 660.000 € (effetto certificazione sui retailer).","2032: 850.000 € con gare pubbliche e nuovi canali.","Barre verticali — Ricavi 2030–2032 in migliaia di €, barra corallo, valori annotati.","Grafico centrato, nessun elemento laterale."],
+["Dati mensili","Vendite stabili con picchi a marzo e ottobre (nuove uscite).","Agosto: rallentamento produttivo programmato.","Media mensile 2031 prevista: 55.000 €.","Barre verticali — Ricavi per mese 2031. Blu notte base, mesi di lancio in corallo.","Barre sottili, etichette mesi 15 pt."],
+["Sprechi e operatività","Scarti del distretto tracciati: 42 tonnellate/anno recuperate.","Residui di taglio riutilizzati in accessori (cinture, portachiavi).","Suole a fine vita ritirate e macinate per nuovi fondi.","Barre before/after — Scarto conferito in discarica 8%→2%; accessori da residui +1.200 pezzi/mese.","Due coppie di barre con etichette."],
+["Ricerca","Analisi dei requisiti di 3 schemi di certificazione circolari.","Survey su 30 retailer: 87% privilegia fornitori certificati.","Audit preliminare materiali su 5 modelli in catalogo.","Torta — Preferenza retailer sugli schemi: A 47%, B 33%, C 20% su 30 intervistati.","Torta a sinistra, bullet a destra."],
+["Creazione","Manuale di catena di custodia degli scarti.","Formazione di 12 addetti su tracciabilità e lotti.","Etichetta digitale QR con composizione verificata.","Organigramma qualità: Founder → Responsabile sostenibilità (nuovo) → Referenti di reparto × 4.","Organigramma verticale, nuovo ruolo in corallo."],
+["Reporting","Mensile: % rigenerato per lotto, scarti recuperati, non conformità.","Trimestrale: avanzamento audit e costi di adeguamento.","Post-certifica: report annuale di sostenibilità pubblicato.","Dashboard 4 card — Rigenerato 63%, Scarti recuperati 42 t, Non conformità 3, Avanzamento audit 65%.","Griglia 2×2, titolo alto, spazio tra card."]],
+swot:{s:["Materie prime dal distretto a km zero","Design riconoscibile","9.000 paia/anno già a mercato"],w:["Certificazioni assenti","Struttura piccola (8 persone)","Margine compresso dai costi"],o:["Normative UE pro-circolarità","Gare pubbliche riservate","Domanda sneakers sostenibili +19%/anno"],t:["Greenwashing dei concorrenti","Costo della certificazione","Disponibilità variabile degli scarti"]},
+road:[["Q2 2031","Audit interno e catena di custodia"],["Q3 2031","Ispezione ente certificatore"],["Q4 2031","Certificazione ed etichetta digitale"],["2032","Ricavi 850.000 € e ingresso nelle gare"]]}]},
+
+{t:"Restauro e upcycling arredi", s:"Sedie e mobili vintage", c:[
+{n:"11",name:"SediaNuova",sector:"Restauro sedie in chiave circolare",city:"Meda (MB)",addr:"Via del Legno 12",ref:"Paolo Cazzaniga — Fondatore e Maestro restauratore",
+ctx:"Nel 2030 SediaNuova restaura sedie nel distretto brianzolo del mobile con vernici all’acqua e imbottiture da fibre rigenerate: 600 pezzi l’anno per privati e contract.",
+goal:"Lancio sul mercato",format:"Storytelling TED Talk",
+pal:[["#F9F7F2","Paglierino"],["#A67C52","Noce chiaro"],["#3E5641","Verde bosco"]],
+slides:[
+["Obiettivi","Lancio del servizio B2C “Rigenera la tua sedia” entro maggio 2031.","500 restauri prenotati nel primo anno di servizio.","Ritiro e riconsegna a domicilio in tutta la Lombardia.","Barre orizzontali — Target restauri per canale anno 1: Privati 320, Contract 130, Negozi partner 50.","Titolo alto, grafico centrale, bullet sotto."],
+["Problema","Il servizio esiste ma è invisibile: nessun brand, nessun sito.","Le famiglie buttano 1,2 milioni di sedie l’anno in Lombardia.","Il contract cerca fornitori circolari ma non li trova.","Linee — Sedie dismesse in Lombardia 2026–2030 (migliaia/anno): trend crescente fino a 1.200. Linea verde bosco.","Grafico 75% larghezza, valori annotati."],
+["Soluzione","Brand e sito con configuratore di restaforo e preventivo immediato.","Ritiro e riconsegna con furgone elettrico di zona.","Pacchetti contract per alberghi e uffici (20+ pezzi).","Diagramma flat: Configuratore → Ritiro → Restauro → Riconsegna.","Quattro icone orizzontali collegate, testo sotto ciascuna."],
+["Approccio","Gen–Feb 2031: brand, sito e configuratore.","Mar–Apr: test del servizio su 2 province.","Mag 2031: lancio pubblico in tutta la Lombardia.","Timeline orizzontale a 3 blocchi, asse gen–mag 2031, alternanza noce e verde bosco.","Timeline centrata, titolo alto, margini generosi."],
+["Dati annuali","2031: 380.000 € previsti dal lancio del servizio.","2032: 520.000 € con 500 restauri/anno a regime.","Quota contract in crescita dal 15% al 28%.","Barre verticali — Ricavi 2031–2032 in migliaia di € con quota contract evidenziata, barra stacked.","Grafico centrato, legenda in alto."],
+["Dati mensili","Picchi a marzo e settembre (primavera e rientro).","Agosto: laboratorio chiuso.","Media mensile prevista 2031: 31.700 €.","Barre verticali — Ricavi per mese 2031. Noce base, mesi di picco in verde bosco.","Barre sottili, etichette mesi 15 pt."],
+["Sprechi e operatività","Vernici all’acqua: emissioni di solventi -90% rispetto alle tradizionali.","Imbottiture da fibre rigenerate del distretto tessile comasco.","Sfridi di legno trasformati in piccoli oggetti da regalo.","Barre before/after — Solventi indice 100→10; imbottitura vergine 100%→25%.","Due coppie di barre con etichette."],
+["Ricerca","Survey su 300 famiglie lombarde: 64% restaurerebbe una sedia di famiglia.","Analisi di 6 servizi simili in Europa: solo 2 con ritiro a domicilio.","3 preventivi test per validare i prezzi del configuratore.","Torta — Motivazione al restauro: Affetto 44%, Sostenibilità 31%, Risparmio 25%.","Torta a sinistra, bullet a destra."],
+["Creazione","Squadra lancio: 3 restauratori, 1 autista, 1 responsabile clienti.","Furgone elettrico e hub di ritiro a Meda.","Configuratore online con 12 finiture e preventivo istantaneo.","Organigramma servizio: Fondatore → Responsabile clienti → 3 restauratori + logistica.","Organigramma verticale centrato, bullet in basso."],
+["Reporting","Settimanale: restauri completati, tempi medi, ritardi ritiro.","Mensile: ricavi per canale, recensioni, costo per restauro.","Trimestrale: margine, saturazione laboratorio, NPS.","Dashboard 4 card — Restauri/mese 42, Tempo medio 9 gg, Recensioni 4,8, NPS 67.","Griglia 2×2, titolo alto, spazio tra card."]],
+swot:{s:["Saper fare brianzolo","Finiture a basso impatto","Esperienza contract esistente"],w:["Brand sconosciuto al pubblico","Nessun canale digitale","Capacità di 600 pezzi/anno"],o:["Cultura anti-spreco domestica","Contract che cerca circolarità","Mobilità elettrica per la logistica"],t:["Fast furniture a basso prezzo","Costo delle materie rigenerate","Stagionalità della domanda"]},
+road:[["Gen–Feb 2031","Brand, sito e configuratore"],["Mar–Apr 2031","Test servizio su 2 province"],["Mag 2031","Lancio in tutta la Lombardia"],["2032","500 restauri/anno e contract al 28%"]]},
+
+{n:"12",name:"BoscoUrbano",sector:"Upcycling mobili vintage e legno recuperato",city:"Torino",addr:"Via dei Restauratori 27",ref:"Nadia Ferrero — Fondatrice e Direttrice creativa",
+ctx:"Nel 2030 BoscoUrbano trasforma mobili vintage e legno di recupero in pezzi unici: laboratorio a Torino, 420 pezzi venduti l’anno, community di 45.000 follower.",
+goal:"Crescita e scale-up",format:"Trend Map",
+pal:[["#F7F5F0","Bianco calce"],["#C46A32","Ruggine"],["#4A5D4E","Verde pino"]],
+slides:[
+["Obiettivi","Da laboratorio artigianale a piccola manifattura: 1.200 pezzi/anno entro il 2032.","Ricavi da 290.000 € a 850.000 €.","Secondo laboratorio con linea di produzione semi-industriale.","Trend map — Nodo BoscoUrbano al centro, 4 direttrici di crescita: prodotto, canali, territorio, team.","Mappa centrata, titolo in alto, spazio bianco perimetrale."],
+["Problema","Pezzo unico non scalabile: ogni mobile richiede 14 ore di lavorazione.","Lista d’attesa di 4 mesi che raffredda la domanda.","Un solo canale di vendita: il laboratorio e i social.","Linee — Ore per pezzo 2028–2030: 18, 16, 14 con lista d’attesa crescente a 4 mesi. Doppia linea.","Grafico 75% larghezza, doppia legenda."],
+["Soluzione","Collezione “Serie Recuperata”: design ripetibili su legno standardizzato.","Mix 70% pezzi unici e 30% serie per scalare i ricavi.","E-commerce e 3 concept store partner a Milano e Bologna.","Diagramma a 3 blocchi: Design di serie → Produzione mista → Canali multipli.","Tre icone orizzontali, testo sotto ciascuna."],
+["Approccio","2030 H2: progettazione della collezione di serie.","2031: secondo laboratorio e apertura e-commerce.","2032: partnership retail e 1.200 pezzi/anno.","Timeline orizzontale a 3 blocchi, asse 2030→2032, alternanza ruggine e verde pino.","Timeline centrata, titolo alto."],
+["Dati annuali","2030: 290.000 € con 420 pezzi.","2031: 520.000 € (+79%) con e-commerce attivo.","2032: 850.000 € con 1.200 pezzi e retail partner.","Barre verticali — Ricavi 2030–2032 in migliaia di €, barra ruggine, valori annotati.","Grafico centrato, nessun testo laterale."],
+["Dati mensili","Picchi a novembre–dicembre e maggio.","E-commerce previsto: +35% di ordini nei weekend.","Media mensile 2031 prevista: 43.300 €.","Barre verticali — Ricavi per mese 2031. Verde pino base, mesi di picco in ruggine.","Barre sottili, etichette mesi 15 pt."],
+["Sprechi e operatività","Legno da pallet e cantine: 28 tonnellate/anno recuperate.","Sfridi macinati in bricchetti per stufe: scarto in discarica azzerato.","Serie ripetibile: ore per pezzo da 14 a 6 sulla linea standard.","Barre before/after — Ore/pezzo 14→6 (linea serie); scarto in discarica 6%→0%.","Due coppie di barre con etichette."],
+["Ricerca","Analisi community: 61% dei follower chiede pezzi sotto 800 €.","Benchmark su 5 laboratori europei di upcycling scalati con successo.","Studio di fattibilità per il secondo laboratorio a Torino nord.","Torta — Fascia di prezzo richiesta: sotto 400 € 28%, 400–800 € 33%, 800–1.500 € 27%, oltre 12%.","Torta a sinistra, bullet a destra."],
+["Creazione","Catalogo di 12 design di serie su legno recuperato standard.","Secondo laboratorio 300 m² con 4 postazioni.","Team da 4 a 9 persone: falegnami, e-commerce, logistica.","Organigramma scale-up: Fondatrice → Produzione + Digitale + Logistica → 9 persone per funzione.","Organigramma verticale, nuovi ruoli in ruggine."],
+["Reporting","Mensile: pezzi prodotti per linea, ordini e-commerce, giacenze.","Trimestrale: ricavi per canale, margine, ore lavorate.","Semestrale: avanzamento investimenti e saturazione laboratori.","Dashboard 4 card — Pezzi/mese 78, Ordini e-com 64, Margine 49%, Ore/pezzo 9,2.","Griglia 2×2, titolo alto, spazio tra card."]],
+swot:{s:["Pezzi unici ad alto valore","Community di 45.000 follower","Approvvigionamento legno a costo quasi nullo"],w:["14 ore per pezzo","Lista d’attesa 4 mesi","Mono-canale di vendita"],o:["Mercato arredo rigenerato +22%/anno","E-commerce di design","Concept store in cerca di storie"],t:["Imitazioni industriali del vintage","Costo degli spazi a Torino","Dipendenza dai social"]},
+road:[["H2 2030","Collezione Serie Recuperata progettata"],["2031","Secondo laboratorio ed e-commerce, 520.000 €"],["2032","Retail partner e 1.200 pezzi, 850.000 €"],["2033","Valutazione linea contract per ospitalità"]]}]},
+
+{t:"Upcycling di scarti food & beverage", s:"Caffè e agrumi", c:[
+{n:"13",name:"CapsulaViva",sector:"Riutilizzo cialde e capsule di caffè usate",city:"Trieste",addr:"Via della Torrefazione 4",ref:"Diego Kovac — Amministratore Delegato",
+ctx:"Nel 2030 CapsulaViva separa e valorizza 1.400 tonnellate di capsule usate l’anno: alluminio rifuso, fondi di caffè in compost e biocombustibile.",
+goal:"Internazionalizzazione",format:"Visual Data-first",
+pal:[["#FAF8F4","Avorio tostato"],["#6F4E37","Caffè"],["#C9A227","Ottone"]],
+slides:[
+["Obiettivi","Espansione in penisola iberica e Balcani occidentali entro il 2032.","2 impianti di trattamento partner all’estero.","Ricavi export da 0 a 780.000 € nel 2032.","Barre orizzontali — Capacità impianti: Trieste 1.400 t, target partner esteri 800 t + 600 t.","Titolo alto, grafico centrale, bullet sotto."],
+["Problema","Mercato italiano della raccolta capsule vicino alla saturazione.","Solo il 31% delle capsule vendute in Italia viene recuperato.","Il know-how di separazione non è esportabile senza impianti locali.","Doughnut — Capsule in Italia 2030: Recuperate 31%, Smaltite 69%. Colori caffè e ottone, legenda laterale.","Doughnut a sinistra, bullet a destra."],
+["Soluzione","Licenza tecnologica del processo di separazione a impianti locali.","Kit di avvio: formazione, manualistica e audit di qualità.","Ritiro dei materiali pregiati (alluminio) verso la fonderia di Trieste.","Diagramma a 3 step: Licenza tecnologia → Avvio impianto → Flusso materiali.","Tre icone orizzontali, testo sotto ciascuna."],
+["Approccio","2030 H2: scouting partner a Barcellona e Spalato.","2031: avvio dei 2 impianti in licenza.","2032: consolidamento e terzo mercato (Atene).","Timeline orizzontale a 3 blocchi, asse 2030→2032, alternanza caffè e ottone.","Timeline centrata, titolo alto."],
+["Dati annuali","2030: 1,6 M€ di ricavi, solo Italia.","2031: 2,05 M€ con royalties estere.","2032: 2,7 M€ di cui 780.000 € export.","Linee — Ricavi totali vs export 2030–2032: doppia linea, caffè (totale) e ottone (export), valori in M€.","Grafico 75% larghezza, doppia legenda in alto."],
+["Dati mensili","Conferimenti stabili: 115 tonnellate/mese in media.","Picco a gennaio per smaltimento regali natalizi.","Royalties estere previste a trimestre da metà 2031.","Barre verticali — Tonnellate trattate per mese 2030. Caffè base, gennaio in ottone.","Barre sottili, etichette mesi 15 pt."],
+["Sprechi e operatività","Recupero alluminio al 97% con nuova linea di separazione.","Fondi di caffè: 100% in compost certificato o biocombustibile.","Acque di lavaggio in circuito chiuso: prelievo idrico -62%.","Barre before/after — Alluminio recuperato 89%→97%; prelievo idrico indice 100→38.","Due coppie di barre con etichette."],
+["Ricerca","Analisi di 4 mercati esteri: volumi, normative, competitor.","3 fiere di settore nel 2030 e 40 incontri con operatori.","Studio dei modelli di licenza tecnologica applicabili.","Torta — Attrattività mercati analizzati: Iberia 41%, Balcani 33%, Grecia 26% su panel di esperti.","Torta a sinistra, bullet a destra."],
+["Creazione","Manuale operativo di licenza in 3 lingue.","Team export: 1 responsabile e 1 tecnico di processo.","Certificazioni di qualità valide nei mercati target.","Organigramma export: AD → Responsabile licenze → Tecnico di processo + Quality auditor.","Organigramma verticale, nuovi ruoli in ottone."],
+["Reporting","Mensile: tonnellate per impianto, rese di separazione, royalties.","Trimestrale: avanzamento partner esteri e audit.","Semestrale al board: P&L export e pipeline nuovi mercati.","Dashboard 4 card — Tonnellate 115/mese, Resa alluminio 97%, Royalties 48k €, Partner attivi 2.","Griglia 2×2, titolo alto, spazio tra card."]],
+swot:{s:["Tecnologia di separazione proprietaria","Posizione logistica di Trieste","Rese di recupero elevate"],w:["Mercato domestico in saturazione","Nessuna presenza estera","Dipendenza dalla raccolta organizzata"],o:["Normative UE sul riciclo imballaggi","Mercati iberico e balcanico vergini","Domanda di alluminio secondario"],t:["Sistemi concorrenti di riciclo","Costi energetici di processo","Volatilità del prezzo alluminio"]},
+road:[["H2 2030","Scouting partner a Barcellona e Spalato"],["2031","2 impianti esteri in licenza attivi"],["2032","Export a 780.000 € e terzo mercato"],["2033","Valutazione mercato nord-africano"]]},
+
+{n:"14",name:"Agrumia",sector:"Scarti di agrumi per bioplastiche, carte e tessili",city:"Catania",addr:"Via dell’Agrume 9",ref:"Lucia Randazzo — Co-fondatrice e Direttrice tecnica",
+ctx:"Nel 2030 Agrumia trasforma 3.000 tonnellate di pastazzo di agrumi etnei in biopolimeri, carte pregiate e fibre tessili, con un impianto pilota a Catania.",
+goal:"Raccolta fondi",format:"Storytelling TED Talk",
+pal:[["#FFFDF7","Bianco zagara"],["#F4A300","Arancio Sicilia"],["#2A9D8F","Verde teal"]],
+slides:[
+["Obiettivi","Round Serie A da 3,5 M€ entro dicembre 2031.","Impianto industriale da 12.000 tonnellate di pastazzo/anno.","Assunzioni: da 9 a 26 persone entro il 2033.","Doughnut — Uso del round: Impianto 55%, Ricerca 20%, Team 15%, Certificazioni 10%. Legenda laterale.","Doughnut a sinistra, bullet a destra, spazio bianco generoso."],
+["Problema","La Sicilia smaltisce oltre 500.000 tonnellate di pastazzo l’anno, in gran parte conferite a costo.","L’impianto pilota non basta: capacità ferma a 3.000 tonnellate.","Le lettere di interesse dei clienti superano 5 volte la produzione possibile.","Barre orizzontali — Domanda raccolta vs capacità: Lettere d’intento 15.000 t, Capacità attuale 3.000 t.","Grafico 75% larghezza, contrasto visivo forte tra le due barre."],
+["Soluzione","Impianto industriale nell’area etnea con tecnologia proprietaria.","3 linee di prodotto: biopolimeri, carte, fibre tessili.","Contratti pluriennali di conferimento con 12 produttori di succo.","Diagramma flat: Pastazzo → Impianto → 3 linee di prodotto.","Tre icone orizzontali con diramazione finale, testo sotto."],
+["Approccio","2031 Q1–Q2: data room e roadshow con 40 investitori.","2031 Q3–Q4: due diligence e closing del round.","2032: cantiere impianto e prime assunzioni.","Timeline orizzontale a 3 blocchi, asse 2031→2032, alternanza arancio e teal.","Timeline centrata, titolo alto."],
+["Dati annuali","2030: 480.000 € di ricavi dall’impianto pilota.","2032: 1,4 M€ previsti con prime linee industriali.","2034: 6,8 M€ a impianto pieno (12.000 t).","Barre verticali — Ricavi 2030, 2032, 2034 in M€: 0,48 / 1,4 / 6,8. Barra arancio, valori annotati.","Grafico centrato, nessun elemento laterale."],
+["Dati mensili","Stagionalità agrumaria: conferimenti da novembre a maggio.","Giugno–ottobre: manutenzione e ricerca.","Picco di lavorazione a gennaio (250 tonnellate/mese nel picco).","Barre verticali — Tonnellate di pastazzo per mese: valori alti nov–mag, zero giu–ott. Arancio base, picchi in teal.","Barre sottili, etichette mesi 15 pt."],
+["Sprechi e operatività","Ogni tonnellata di pastazzo genera 3 output: polimero, carta, fibra.","Acque di processo depurate e riutilizzate al 88%.","Sottoprodotti finali in ammendante agricolo: discarica zero.","Diagramma a flusso circolare — Input pastazzo → 4 output (polimero, carta, fibra, ammendante) con percentuali 30/25/25/20.","Flusso circolare centrato, etichette con percentuali."],
+["Ricerca","3 brevetti depositati sul processo di estrazione.","Pipeline investitori: 18 fondi italiani ed europei profilati.","Survey su 25 potenziali clienti industriali: 76% con target di contenuto bio 2030.","Torta — Interesse clienti per linea di prodotto: Biopolimeri 44%, Carte 31%, Tessile 25%.","Torta a sinistra, bullet a destra."],
+["Creazione","Data room: brevetti, contratti di conferimento, metriche pilota.","Pitch deck di 16 slide con visione al 2034.","Post-closing: responsabile di impianto e team ricerca +6.","Organigramma 2033: Co-fondatori → Impianto + Ricerca + Commerciale → 26 persone.","Organigramma verticale, nuovi ruoli in teal."],
+["Reporting","Mensile a investitori: tonnellate, ricavi per linea, cassa.","Trimestrale: milestone di impianto e avanzamento lavori.","Annuale: report di impatto (CO₂ evitata, rifiuti sottratti).","Dashboard 4 card — Tonnellate 250/mese, Ricavi 40k €/mese, Cassa 1,1 M€, CO₂ evitata 84 t.","Griglia 2×2, titolo alto, spazio tra card."]],
+swot:{s:["3 brevetti sul processo","Materia prima locale abbondante","3 linee di prodotto dallo stesso input"],w:["Capacità pilota limitata","Dipendenza dalla stagionalità agrumaria","Fabbisogno di capitale elevato"],o:["Plastiche bio richieste dalle normative","Pastazzo oggi smaltito a costo","Fondi europei per la bioeconomia"],t:["Tecnologie concorrenti emergenti","Costo dell’energia industriale","Climatizzazione degli agrumeti"]},
+road:[["Q2 2031","Data room e roadshow investitori"],["Q4 2031","Closing Serie A da 3,5 M€"],["2032","Cantiere impianto industriale etneo"],["2034","Impianto a regime: 12.000 t e 6,8 M€"]]}]},
+
+{t:"Gadget tech sostenibili (drinkware)", s:"Borracce e coffee cup", c:[
+{n:"15",name:"iTech",sector:"Borracce termiche intelligenti",city:"Milano",addr:"Via dell’Innovazione 25",ref:"Alessio Moretti — Fondatore e Amministratore Delegato",
+ctx:"Nel 2030 iTech vende 45.000 borracce termiche con sensore di idratazione l’anno, ma il 70% degli ordini passa ancora da marketplace terzi.",
+goal:"Digitalizzazione",format:"Trend Map",
+pal:[["#F7F8FA","Grigio alluminio"],["#0A84FF","Blu tech"],["#1C1C1E","Nero dispositivo"]],
+slides:[
+["Obiettivi","Canale diretto (D2C) dal 30% al 65% delle vendite entro il 2032.","App iTech con 120.000 utenti attivi mensili.","Dati di prodotto per personalizzare offerte e rifornimenti.","Trend map — iTech al centro, 3 direttrici: D2C, App e IoT, Dati. Nodi collegati con intensità di traffico.","Mappa centrata, titolo in alto, spazio bianco perimetrale."],
+["Problema","Marketplace terzi: commissioni al 22% e nessun dato cliente.","App attuale usata solo dal 9% degli acquirenti.","Nessuna visione del ciclo di vita del prodotto dopo la vendita.","Doughnut — Canali di vendita 2030: Marketplace 70%, D2C 30%. Target 2032: D2C 65%. Due doughnut affiancati.","Due doughnut affiancati con frecce di trasformazione, titolo alto."],
+["Soluzione","Nuovo e-commerce proprietario con configurazione prodotto.","App 3.0: idratazione, garanzia, riordino filtri e accessori.","CRM con dati d’uso anonimi per offerte mirate.","Diagramma a 3 blocchi flat: E-commerce → App 3.0 → CRM.","Tre icone orizzontali, testo sotto ciascuna."],
+["Approccio","H2 2030: nuovo e-commerce e migrazione ordini.","H1 2031: lancio App 3.0 e programma fedeltà.","H2 2031–2032: personalizzazione spinta sui dati d’uso.","Timeline orizzontale a 3 blocchi, asse 2030→2032, alternanza blu tech e nero.","Timeline centrata, titolo alto."],
+["Dati annuali","2030: 1,58 M€ con 45.000 borracce vendute.","2031: 2,1 M€ (+33%) con D2C al 48%.","2032: 2,9 M€ con D2C al 65% e ricavi da accessori.","Barre verticali stacked — Ricavi 2030–2032: quota D2C in blu, marketplace in grigio, valori in M€.","Grafico centrato, legenda in alto."],
+["Dati mensili","Picchi a giugno (estate) e dicembre (regali).","Ordini App: +40% nei giorni con ondate di calore.","Media mensile 2031 prevista: 175.000 €.","Barre verticali — Ricavi per mese 2031. Blu tech base, mesi di picco in nero.","Barre sottili, etichette mesi 15 pt."],
+["Sprechi e operatività","Previsioni di domanda dai dati App: scorte -27%.","Packaging senza plastica e formato ridotto: volumi spedizione -18%.","Resi ricondizionati e rivenduti nella sezione outlet.","Barre before/after — Scorte indice 100→73; volume pack 100→82.","Due coppie di barre con etichette."],
+["Ricerca","Analisi su 1.800 clienti: 58% lascerebbe il marketplace per vantaggi diretti.","Benchmark su 4 stack digitali per hardware di consumo.","Test di usabilità dell’App 3.0 su 120 utenti.","Torta — Motivo acquisto diretto preferito: Prezzo 34%, Garanzia 29%, Esclusivi 22%, Altro 15%.","Torta a sinistra, bullet a destra."],
+["Creazione","E-commerce proprietario con configuratore di colori e incisioni.","Sviluppo App 3.0 in 14 settimane con team misto.","CRM integrato con assistenza e logistica.","Organigramma digitale: AD → Responsabile e-commerce + Responsabile App → CRM, logistica, assistenza.","Organigramma verticale, nuovi ruoli in blu tech."],
+["Reporting","Settimanale: ordini per canale, conversione e-commerce, utenti App.","Mensile: ricavi D2C, CAC, ricavi da accessori.","Trimestrale: quota D2C, margine di canale, retention App.","Dashboard 4 card — Ordini/mese 3.900, D2C 48%, Utenti App attivi 54.000, CAC 7,80 €.","Griglia 2×2, titolo alto, spazio tra card."]],
+swot:{s:["Prodotto con sensore proprietario","45.000 pezzi/anno venduti","Marchio riconoscibile"],w:["70% dipendenza da marketplace","App usata dal 9%","Nessun dato cliente"],o:["Idratazione monitorata in crescita","Vantaggi D2C apprezzati","Accessori e ricambi ricorrenti"],t:["Concorrenza asiatica sui prezzi","Regole dei marketplace","Costo pubblicitario digitale"]},
+road:[["H2 2030","Nuovo e-commerce proprietario"],["H1 2031","App 3.0 e programma fedeltà"],["2032","D2C al 65% e ricavi 2,9 M€"],["2033","Linea accessori a subscription"]]},
+
+{n:"16",name:"RiSorso",sector:"Coffee cup smart e lunch box in materiale riciclato",city:"Genova",addr:"Calata dei Riciclatori 6",ref:"Francesca Parodi — Amministratrice Delegata",
+ctx:"Nel 2030 RiSorso produce coffee cup riutilizzabili con chip di riconoscimento e lunch box termici in plastica riciclata marina: 28.000 pezzi l’anno.",
+goal:"Partnership B2B",format:"Visual Data-first",
+pal:[["#F8F7F4","Bianco sale"],["#1B7F79","Teal marino"],["#E07A5F","Corallo porto"]],
+slides:[
+["Obiettivi","10 contratti corporate di fornitura entro il 2032.","Quota B2B dei ricavi dal 22% al 55%.","Cup con chip integrate nei circuiti di welfare aziendale.","Barre orizzontali — Pipeline B2B per tipologia: Aziende 5, Università 3, Catering 2. Valori in contratti target.","Titolo alto, grafico centrale, bullet sotto."],
+["Problema","Vendita al dettaglio satura: crescita ferma al +4%.","Le aziende cercano gadget sostenibili certificati e personalizzabili.","Il chip delle cup non è ancora collegato a servizi per le imprese.","Linee — Crescita ricavi retail 2027–2030: 12%, 9%, 6%, 4%. Trend in rallentamento, linea corallo.","Grafico 75% larghezza, valori annotati."],
+["Soluzione","Offerta “RiSorso Business”: cup e lunch box personalizzati con chip.","Servizio di reportistica rifiuti evitati per i bilanci di sostenibilità.","Integrazione del chip con distributori automatici partner.","Diagramma a 3 blocchi: Fornitura personalizzata → Chip servizi → Reportistica impatto.","Tre icone orizzontali, testo sotto ciascuna."],
+["Approccio","H2 2030: qualificazione di 30 aziende target in Liguria e Piemonte.","2031: 5 contratti pilota e casi di successo documentati.","2032: estensione nazionale con 2 agenti di commercio.","Timeline orizzontale a 3 blocchi, asse 2030→2032, alternanza teal e corallo.","Timeline centrata, titolo alto."],
+["Dati annuali","2030: 620.000 € di ricavi, B2B al 22%.","2031: 780.000 € con 5 contratti pilota.","2032: 1,15 M€ con quota B2B al 55%.","Barre verticali stacked — Ricavi 2030–2032: quota B2B in teal, retail in grigio, valori in migliaia di €.","Grafico centrato, legenda in alto."],
+["Dati mensili","Picchi a settembre (rientri aziendali) e maggio (eventi).","Ordini B2B concentrati: 68% nel primo mese di ogni trimestre.","Media mensile 2031 prevista: 65.000 €.","Barre verticali — Ricavi per mese 2031. Teal base, mesi di picco in corallo.","Barre sottili, etichette mesi 15 pt."],
+["Sprechi e operatività","Plastica riciclata da filiera portuale ligure: 16 t/anno.","Stampaggio su prenotazione B2B: giacenze -40%.","Cup a fine vita ritirate e rimacinate nello stesso ciclo.","Barre before/after — Giacenze indice 100→60; materiale vergine 22%→5%.","Due coppie di barre con etichette."],
+["Ricerca","Survey su 60 responsabili acquisti: 74% valuta gadget sostenibili nel 2031.","Analisi di 4 programmi welfare con oggetto fisico.","Test di 2 formati di reportistica impatto su 10 aziende.","Torta — Budget gadget sostenibili aziendali: in aumento 58%, stabile 30%, in calo 12%.","Torta a sinistra, bullet a destra."],
+["Creazione","Catalogo business con personalizzazione e minimi d’ordine.","Modulo chip per distributori automatici partner.","Team B2B: 1 responsabile, 1 tecnico di integrazione, 2 agenti.","Organigramma B2B: AD → Responsabile business → Tecnico chip + 2 agenti commerciali.","Organigramma verticale, nuovi ruoli in corallo."],
+["Reporting","Mensile: contratti attivi, pezzi forniti, ricavi per cliente.","Trimestrale: quota B2B, soddisfazione clienti, rifiuti evitati.","Semestrale: report di impatto consegnato ai partner corporate.","Dashboard 4 card — Contratti attivi 6, Pezzi/mese 2.400, Quota B2B 38%, Rifiuti evitati 3,2 t.","Griglia 2×2, titolo alto, spazio tra card."]],
+swot:{s:["Chip di riconoscimento proprietario","Plastica riciclata di filiera portuale","Prodotto certificato"],w:["Crescita retail ferma","Nessuna forza vendita B2B","Capacità di 28.000 pezzi/anno"],o:["Welfare aziendale in espansione","Obblighi di reportistica di sostenibilità","Distributori automatici da integrare"],t:["Gadget asiatici a basso costo","Cicli di acquisto corporate lenti","Prezzo della plastica riciclata"]},
+road:[["H2 2030","Qualificazione di 30 aziende target"],["2031","5 contratti pilota documentati"],["2032","10 contratti e quota B2B al 55%"],["2033","Estensione estera in area mediterranea"]]}]},
+
+{t:"Piattaforme digitali per la ristorazione", s:"Prenotazioni e order&pay", c:[
+{n:"17",name:"TavoloPronto",sector:"Piattaforma di prenotazione ristoranti",city:"Roma",addr:"Via dei Ristoratori 11",ref:"Matteo Santoro — Fondatore e Amministratore Delegato",
+ctx:"Nel 2030 TavoloPronto gestisce le prenotazioni di 3.100 ristoranti in 6 regioni con 2,4 milioni di coperti prenotati l’anno.",
+goal:"Crescita e scale-up",format:"Storytelling TED Talk",
+pal:[["#FAF9F6","Bianco tovaglia"],["#B02E2E","Rosso sala"],["#1F3A5F","Blu notte"]],
+slides:[
+["Obiettivi","Da 3.100 a 9.000 ristoranti attivi entro il 2032.","Coperture nazionali: da 6 a 20 regioni.","Ricavi ricorrenti da 2,9 a 8,4 M€.","Barre orizzontali — Ristoranti per macro-area 2030 vs target 2032: Centro, Nord, Sud, Isole. Coppie di barre.","Titolo alto, grafico centrale, bullet sotto."],
+["Problema","Crescita rallentata nelle regioni presidiate: penetrazione al 38%.","Struttura commerciale di 6 persone per 3.100 clienti.","Infrastruttura tecnica che regge 3 volte il volume attuale e non oltre.","Linee — Penetrazione mercato per regione 2028–2030: 31%, 35%, 38% con plateau. Linea rossa.","Grafico 75% larghezza, valori annotati."],
+["Soluzione","Modello di vendita indiretta: 40 agenti-rivenditori locali.","Nuova architettura cloud multi-regione.","Pacchetti per catene e gruppi di ristorazione.","Diagramma a 3 blocchi: Rete agenti → Infrastruttura → Pacchetti catene.","Tre icone orizzontali, testo sotto ciascuna."],
+["Approccio","2030 H2: reclutamento agenti e migrazione cloud.","2031: attivazione di 8 nuove regioni.","2032: copertura di 20 regioni e lancio modulo catene.","Timeline orizzontale a 3 blocchi, asse 2030→2032, alternanza rosso sala e blu notte.","Timeline centrata, titolo alto."],
+["Dati annuali","2030: 2,9 M€ di ricavi ricorrenti.","2031: 5,1 M€ con 8 nuove regioni.","2032: 8,4 M€ con 9.000 ristoranti.","Barre verticali — Ricavi ricorrenti 2030–2032 in M€, barra rossa, valori annotati.","Grafico centrato, nessun elemento laterale."],
+["Dati mensili","Picchi di prenotazioni: dicembre, agosto e ponti primaverili.","Disdette medie sotto il 9% grazie ai promemoria automatici.","2,4 milioni di coperti/anno, media 200.000/mese.","Barre verticali — Coperti prenotati per mese 2030. Blu notte base, mesi di picco in rosso.","Barre sottili, etichette mesi 15 pt."],
+["Sprechi e operatività","Promemoria automatici: mancate presentazioni dal 14% al 9%.","Liste d’attesa intelligenti: coperti recuperati +120.000/anno.","Server multi-regione: costi infrastruttura per coperto -31%.","Barre before/after — No-show 14%→9%; costo infra per coperto indice 100→69.","Due coppie di barre con etichette."],
+["Ricerca","Interviste a 80 ristoratori: il 67% cambierebbe piattaforma per la rete di agenti locale.","Analisi di 3 piattaforme europee scalate con vendita indiretta.","Studio di capacità infrastrutturale per 9.000 ristoranti.","Torta — Criterio di scelta piattaforma: Prezzo 30%, Assistenza locale 39%, Funzioni 31%.","Torta a sinistra, bullet a destra."],
+["Creazione","Programma agenti: formazione, provvigioni, aree esclusive.","Migrazione cloud multi-regione in 16 settimane.","Modulo catene con multi-sede e reportistica di gruppo.","Organigramma scale-up: AD → Commerciale (40 agenti) + Tecnologia + Assistenza → 26 persone.","Organigramma verticale, nuove funzioni in rosso."],
+["Reporting","Settimanale: nuovi ristoranti, coperti, disdette, uptime.","Mensile: ricavi ricorrenti, churn, costo per acquisizione.","Trimestrale al board: penetrazione regionale e margini.","Dashboard 4 card — Ristoranti 3.100, Coperti/mese 200k, Churn 1,4%, Uptime 99,9%.","Griglia 2×2, titolo alto, spazio tra card."]],
+swot:{s:["2,4 milioni di coperti/anno","Churn basso all’1,4%","Conoscenza del mercato centro-italia"],w:["Vendita diretta costosa","Penetrazione al 38%","Infrastruttura a fine capacità"],o:["Ristoranti digitali in crescita","Modelli indiretti disponibili","Domanda di reportistica dai gruppi"],t:["Piattaforme internazionali in ingresso","Commissioni in pressione","Carenza di personale nei ristoranti"]},
+road:[["H2 2030","Rete agenti e migrazione cloud"],["2031","8 nuove regioni, 5,1 M€"],["2032","20 regioni, 9.000 ristoranti, 8,4 M€"],["2033","Modulo catene su scala nazionale"]]},
+
+{n:"18",name:"ContoLesto",sector:"Order&pay e menu digitale per ristoranti",city:"Bari",addr:"Via del Commercio Digitale 3",ref:"Ilaria De Palo — Direttrice operativa",
+ctx:"Nel 2030 ContoLesto opera da Bari con 1.400 ristoranti nel Sud Italia: ordine al tavolo con QR, pagamento digitale e menu dinamico.",
+goal:"Apertura nuova sede",format:"Trend Map",
+pal:[["#F8F8F5","Bianco calce"],["#0F8B8D","Teal adriatico"],["#EC9A29","Ambra sole"]],
+slides:[
+["Obiettivi","Apertura sede operativa a Milano entro settembre 2031.","Presidio commerciale del Nord Italia: 900 ristoranti in 18 mesi.","Team della nuova sede: 12 persone entro il 2032.","Trend map — Italia stilizzata: nodo Bari attivo, nodo Milano in apertura, frecce di espansione verso Nord-Ovest e Nord-Est.","Mappa centrata, titolo in alto, spazio bianco perimetrale."],
+["Problema","Il Nord genera il 61% della domanda nazionale ma è scoperto.","Trasferte commerciali da Bari: costi alti e presenza rada.","I clienti del Nord chiedono assistenza in loco entro 4 ore.","Barre orizzontali — Domanda per macro-area: Nord 61%, Centro 24%, Sud e Isole 15%. Copertura attuale inversa.","Grafico 75% larghezza, contrasto tra domanda e copertura."],
+["Soluzione","Sede a Milano con commerciale, assistenza e demo room.","Recruiting locale di 12 persone in 3 ondate.","Contratti di assistenza con tempi garantiti sul territorio.","Diagramma a 3 blocchi: Sede → Team locale → Assistenza garantita.","Tre icone orizzontali, testo sotto ciascuna."],
+["Approccio","Q1 2031: ricerca immobile e costituzione unità locale.","Q2–Q3 2031: selezioni e allestimento sede.","Set 2031: apertura operativa e primi 100 contratti nord.","Timeline orizzontale a 4 blocchi, asse gen–set 2031, alternanza teal e ambra.","Timeline centrata, titolo alto."],
+["Dati annuali","2030: 1,7 M€ di ricavi da 1.400 ristoranti al Sud.","2031: 2,2 M€ con avvio sede Milano.","2032: 3,4 M€ con 900 ristoranti al Nord.","Barre verticali — Ricavi 2030–2032 in M€ con quota Nord evidenziata in ambra, barra stacked.","Grafico centrato, legenda in alto."],
+["Dati mensili","Transazioni in crescita costante: 420.000/mese nel 2030.","Picchi estivi nelle località turistiche pugliesi.","Nuova sede prevista a pieno regime da marzo 2032.","Linee — Transazioni mensili 2030–2031 con proiezione Nord post-apertura, doppia linea teal e ambra.","Grafico 75% larghezza, doppia legenda."],
+["Sprechi e operatività","Menu dinamico: fuori listino in tempo reale, ordini errati -38%.","Assistenza remota di primo livello: interventi sul campo -45%.","Sede con 12 postazioni ibride: spazi ottimizzati al 78%.","Barre before/after — Ordini errati 6,2%→3,8%; interventi sul campo indice 100→55.","Due coppie di barre con etichette."],
+["Ricerca","Analisi di 5 sedi operative di software house del Sud aperte al Nord.","Survey su 300 ristoratori settentrionali: 71% vuole assistenza locale.","Confronto di 4 zone di Milano per costi e collegamenti.","Torta — Criterio scelta zona sede: Costi 33%, Collegamenti 29%, Talento 24%, Immagine 14%.","Torta a sinistra, bullet a destra."],
+["Creazione","Unità locale registrata e sede di 220 m² con demo room.","Organico in 3 ondate: 4 commerciali, 5 tecnici, 3 supporto.","Demo room con 3 ristoranti simulati per le vendite.","Organigramma sede Milano: Responsabile sede → Commerciale + Assistenza + Marketing operativo → 12 persone.","Organigramma verticale, nuovi ruoli in ambra."],
+["Reporting","Mensile: contratti nord, transazioni, tempo medio assistenza.","Trimestrale: ricavi per area, costi sede, produttività team.","Semestrale al board: avanzamento target 900 ristoranti.","Dashboard 4 card — Contratti nord 240, Transazioni 585k/mese, Assistenza 3,1 h, Produttività 92%.","Griglia 2×2, titolo alto, spazio tra card."]],
+swot:{s:["1.400 ristoranti fidelizzati","Tecnologia order&pay matura","Costi operativi del Sud vantaggiosi"],w:["Assenza di presidio al Nord","Assistenza solo da remoto","Brand poco noto fuori regione"],o:["Domanda nord al 61%","Ristorazione digitale in crescita","Talento tech disponibile a Milano"],t:["Competitor nazionali già al Nord","Costo del lavoro milanese","Difficoltà di recruiting iniziale"]},
+road:[["Q1 2031","Immobile e unità locale a Milano"],["Set 2031","Apertura sede e primi 100 contratti"],["2032","12 persone in organico, 900 ristoranti nord"],["2033","Ricavi 3,4 M€ e valutazione terza sede"]]}]},
+
+{t:"Water tech", s:"Desalinizzazione e irrigazione smart", c:[
+{n:"19",name:"Salmaris",sector:"Desalinizzazione dell’acqua marina",city:"Cagliari",addr:"Lungomare dei Ricercatori 8",ref:"Giovanni Sanna — Fondatore e Amministratore Delegato",
+ctx:"Nel 2030 Salmaris progetta impianti modulari di dissalazione a osmosi inversa alimentati da energia solare per isole e aree costiere: 7 impianti attivi nel Mediterraneo.",
+goal:"Internazionalizzazione",format:"Visual Data-first",
+pal:[["#F5F8F9","Azzurro nebbia"],["#0B5D77","Blu profondo"],["#E8A33D","Ambra solare"]],
+slides:[
+["Obiettivi","Espansione in Spagna, Grecia e Nord Africa entro il 2032.","Da 7 a 16 impianti modulari installati.","Ricavi esteri al 50% del totale nel 2032.","Barre orizzontali — Impianti per mercato 2032 target: Italia 6, Spagna 4, Grecia 3, Nord Africa 3.","Titolo alto, grafico centrale, bullet sotto."],
+["Problema","Mercato insulare italiano limitato: 12 siti potenziali residui.","Cicli di vendita lunghi (18 mesi) su committenza pubblica.","Nessuna struttura commerciale estera.","Linee — Pipeline impianti per anno 2028–2030: 3, 4, 4 con saturazione del mercato domestico. Linea blu.","Grafico 75% larghezza, valori annotati."],
+["Soluzione","Moduli standardizzati da 500 m³/giorno certificati per l’export.","Reti di installatori locali formati in 3 paesi.","Finanziamento blended con programmi di cooperazione mediterranei.","Diagramma a 3 blocchi: Modulo standard → Rete installatori → Finanza blended.","Tre icone orizzontali, testo sotto ciascuna."],
+["Approccio","2030 H2: uffici di rappresentanza a Valencia e Atene.","2031: prime 4 installazioni estere e certificazioni locali.","2032: ingresso Nord Africa con 3 impianti.","Timeline orizzontale a 3 blocchi, asse 2030→2032, alternanza blu profondo e ambra.","Timeline centrata, titolo alto."],
+["Dati annuali","2030: 4,2 M€ di ricavi da 7 impianti e manutenzione.","2031: 5,6 M€ con prime commesse estere.","2032: 7,9 M€ con ricavi esteri al 50%.","Barre verticali stacked — Ricavi 2030–2032: quota estera in ambra, Italia in blu, valori in M€.","Grafico centrato, legenda in alto."],
+["Dati mensili","Domanda stagionale: picchi di produzione idrica giugno–agosto.","Manutenzione programmata in aprile e ottobre.","Ricavi da manutenzione: 38.000 €/mese ricorrenti.","Linee — Produzione acqua per mese (m³, migliaia) con area di manutenzione evidenziata, linea blu e area ambra.","Grafico 75% larghezza, doppia legenda."],
+["Sprechi e operatività","Recupero energetico sulle pompe: consumi -24% per m³.","Salamoia gestita con diffusori: impatto locale sotto soglia.","Telediagnostica: interventi programmati, trasferte -35%.","Barre before/after — Energia per m³ 3,4→2,6 kWh; trasferte tecniche indice 100→65.","Due coppie di barre con etichette."],
+["Ricerca","Analisi di 6 mercati mediterranei: stress idrico, energia, normative.","45 incontri istituzionali tra 2029 e 2030 in 3 paesi.","Studio di 3 modelli di rete installatori funzionanti.","Torta — Priorità mercati esteri: Spagna 38%, Grecia 33%, Nord Africa 29% su panel tecnico.","Torta a sinistra, bullet a destra."],
+["Creazione","Modulo export con certificazioni per 3 paesi.","Uffici di rappresentanza con 2 responsabili paese.","Academy installatori: 60 tecnici formati nel 2031.","Organigramma internazionale: AD → Responsabili paese ES/GR/NA → Installatori certificati e service.","Organigramma verticale, nuovi ruoli in ambra."],
+["Reporting","Mensile: impianti in produzione, acqua erogata, ricavi per paese.","Trimestrale: pipeline commerciale e tempi di ciclo.","Semestrale: P&L per mercato e avanzamento certificazioni.","Dashboard 4 card — Impianti 7, Acqua 92.000 m³/mese, Ricavi esteri 28%, Pipeline 9 impianti.","Griglia 2×2, titolo alto, spazio tra card."]],
+swot:{s:["Moduli alimentati a solare","7 impianti con dati reali","Competenza su acqua salmastra e marina"],w:["Mercato domestico limitato","Cicli di vendita lunghi","Nessuna rete estera"],o:["Stress idrico mediterraneo crescente","Fondi di cooperazione 2030","Isole che cercano autonomia idrica"],t:["Grandi player internazionali","Normative sulla salamoia","Costo dei componenti a membrana"]},
+road:[["H2 2030","Uffici a Valencia e Atene"],["2031","4 impianti esteri e certificazioni"],["2032","16 impianti e ricavi esteri al 50%"],["2033","Ingresso mercati Medio Oriente"]]},
+
+{n:"20",name:"SolcoVerde",sector:"Irrigazione smart e depurazione acque agricole",city:"Foggia",addr:"Strada dell’Irrigazione 5",ref:"Rosa Lombardi — Fondatrice e Amministratrice Delegata",
+ctx:"Nel 2030 SolcoVerde serve 260 aziende agricole del Tavoliere con sonde di umidità, irrigazione a rateo variabile e piccoli depuratori per acque di lavaggio.",
+goal:"Certificazione di sostenibilità",format:"Storytelling TED Talk",
+pal:[["#F7F9F3","Verde chiarissimo"],["#2E7D32","Verde campo"],["#C0CA33","Giallo grano"]],
+slides:[
+["Obiettivi","Certificazione ambientale di servizio entro giugno 2032.","Risparmio idrico certificato del 30% per le aziende clienti.","Accesso a bandi agricoli premiali per fornitori certificati.","Barre orizzontali — Risparmio idrico medio per coltura: Ortaggi 34%, Vite 29%, Olivo 27%, Grano 22%. Target certificato 30%.","Titolo alto, grafico centrale, bullet sotto."],
+["Problema","Il risparmio idrico dichiarato non è misurato da terzi.","I bandi 2032 premiano solo fornitori con certificazione.","Le aziende clienti chiedono dati verificabili per i propri obblighi.","Doughnut — Clienti che richiedono dati certificati: 68% sì, 32% non ancora. Colori palette, legenda laterale.","Doughnut a sinistra, bullet a destra."],
+["Soluzione","Misurazione con sonde calibrate e protocolli validati.","Certificazione di servizio con ente terzo accreditato.","Report idrico annuale verificato per ogni cliente.","Diagramma a 3 step: Misurazione → Verifica terza → Certificazione.","Tre icone orizzontali, testo sotto ciascuna."],
+["Approccio","2030 H2: adeguamento protocolli e strumenti di misura.","2031: audit interni e verifica pilota su 40 aziende.","Giu 2032: certificazione e lancio del report idrico verificato.","Timeline orizzontale a 3 blocchi, asse 2030→2032, alternanza verde campo e giallo grano.","Timeline centrata, titolo alto."],
+["Dati annuali","2030: 1,4 M€ di ricavi da 260 aziende clienti.","2031: 1,7 M€ con 320 aziende in verifica pilota.","2032: 2,3 M€ post-certificazione con 400 aziende.","Barre verticali — Ricavi 2030–2032 in M€ con n. clienti annotato sopra ogni barra, barra verde.","Grafico centrato, nessun elemento laterale."],
+["Dati mensili","Stagione irrigua aprile–settembre: 78% dei consumi gestiti.","Ottobre–marzo: manutenzione e depurazione.","Acqua gestita: 4,8 milioni di m³/anno.","Linee — Volumi irrigui per mese con stagione irrigua evidenziata in area verde, linea e area.","Grafico 75% larghezza, legenda in alto."],
+["Sprechi e operatività","Irrigazione a rateo variabile: acqua -30% sulle colture pilota.","Acque di lavaggio depurate e riutilizzate al 74%.","Manutenzione predittiva delle sonde: guasti -41%.","Barre before/after — Acqua per ettaro indice 100→70; guasti sonda 12%→7%.","Due coppie di barre con etichette."],
+["Ricerca","Analisi di 4 schemi di certificazione per servizi idrici agricoli.","Verifica pilota su 40 aziende del Tavoliere: dati 2028–2030.","Colloqui con 3 enti certificatori e 2 consorzi di bonifica.","Torta — Esito verifica pilota: Dati validi 82%, Da integrare 13%, Non idonei 5% su 40 aziende.","Torta a sinistra, bullet a destra."],
+["Creazione","Protocollo di misura con sonde calibrate annualmente.","Responsabile sostenibilità dedicato dal 2031.","Report idrico annuale verificato, consegnato a ogni cliente.","Organigramma qualità: AD → Responsabile sostenibilità → Tecnici di campo e laboratorio dati.","Organigramma verticale, nuovo ruolo in giallo grano."],
+["Reporting","Mensile: volumi per azienda, allarmi siccità, guasti.","Trimestrale: risparmio idrico aggregato e avanzamento certificazione.","Annuale: report idrico verificato per cliente e per bacino.","Dashboard 4 card — Aziende 260, Acqua gestita 4,8 Mm³/anno, Risparmio 28%, Guasti 4%.","Griglia 2×2, titolo alto, spazio tra card."]],
+swot:{s:["260 aziende clienti fidelizzate","Dati di campo ventennali","Competenza su depurazione agricola"],w:["Risparmio non certificato","Struttura di 11 persone","Stagionalità dei ricavi"],o:["Bandi premiali per fornitori certificati","Siccità strutturale del Sud","Obblighi di rendicontazione idrica"],t:["Grandi consorzi tecnologici","Costo delle sonde importate","Resistenza culturale degli agricoltori"]},
+road:[["H2 2030","Protocolli e strumenti adeguati"],["2031","Verifica pilota su 40 aziende"],["Giu 2032","Certificazione e report idrico verificato"],["2033","Estensione a Basilicata e Sicilia"]]}]}
+];
+
+/* ============================================================
+   RENDER
+============================================================ */
+const STEPS = ["Obiettivi","Problema","Soluzione","Approccio","Dati annuali","Dati mensili","Sprechi e operatività","Ricerca","Creazione","Reporting"];
+
+function briefHTML(){
+  return BRIEF.map((b,i)=>`
+    <div class="acc" id="brief-${i}">
+      <button class="acc-head" onclick="tog(this)">
+        <span class="brief-num">${String(i+1).padStart(2,"0")}</span>
+        <span class="brief-head"><strong>${b[0]}</strong></span>
+        <span class="chev">›</span>
+      </button>
+      <div class="acc-body"><div class="acc-inner"><div class="acc-pad">
+        <p style="font-size:14.5px;color:var(--ink2)">${b[1]}</p>
+      </div></div></div>
+    </div>`).join("");
+}
+
+function clientHTML(c, pairIdx){
+  const pal = c.pal.map(p=>`
+    <div class="swatch"><div class="col" style="background:${p[0]}"></div>
+    <div class="lbl"><b>${p[1]}</b><small>${p[0].toUpperCase()}</small></div></div>`).join("");
+
+  const slides = c.slides.map((s,i)=>`
+    <div class="slide">
+      <div class="s-top"><span class="s-badge">${String(i+1).padStart(2,"0")} · ${STEPS[i]}</span><h4>Slide ${i+1} — ${s[0]}</h4></div>
+      <ul>${s[1]&&s[1].length?'':''}</ul>
+      ${bulletsOf(s)}
+      <div class="vbox"><span>Grafico</span><p>${s[3]}</p></div>
+      <div class="lbox"><b>Layout:</b> ${s[4]}</div>
+    </div>`).join("");
+
+  const swot = `
+    <div class="swot">
+      <div class="sw s"><b>Punti di forza</b><ul>${c.swot.s.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+      <div class="sw w"><b>Debolezze</b><ul>${c.swot.w.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+      <div class="sw o"><b>Opportunità</b><ul>${c.swot.o.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+      <div class="sw t"><b>Minacce</b><ul>${c.swot.t.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+    </div>`;
+
+  const road = `<ul class="road">${c.road.map(r=>`<li><b>${r[0]}</b><span>${r[1]}</span></li>`).join("")}</ul>`;
+
+  return `
+  <div class="acc client" id="cliente-${c.n}">
+    <button class="acc-head client-head" onclick="tog(this)">
+      <span class="c-num">${c.n}</span>
+      <span class="c-info"><strong>${c.name}</strong><small>${c.city} · ${c.sector}</small></span>
+      <span class="chev">›</span>
+    </button>
+    <div class="acc-body"><div class="acc-inner"><div class="acc-pad">
+
+      <div class="chips">
+        <span class="chip">Obiettivo: ${c.goal}</span>
+        <span class="chip soft">${c.format}</span>
+      </div>
+
+      <div class="meta-grid">
+        <div class="meta"><span>Settore</span><p>${c.sector}</p></div>
+        <div class="meta"><span>Sede</span><p>${c.addr}, ${c.city}</p></div>
+        <div class="meta"><span>Referente</span><p>${c.ref}</p></div>
+        <div class="meta"><span>Formato contenuto</span><p>${c.format}</p></div>
+      </div>
+      <div class="meta"><span>Contesto 2030</span><p>${c.ctx}</p></div>
+
+      <div class="h-sez">Palette</div>
+      <div class="pal">${pal}</div>
+
+      <div class="h-sez">Presentazione aziendale — 10 slide</div>
+      ${slides}
+
+      <div class="h-sez">Mini SWOT</div>
+      ${swot}
+
+      <div class="h-sez">Roadmap 2030–2032</div>
+      ${road}
+
+    </div></div></div>
+  </div>`;
+}
+
+function bulletsOf(s){
+  const arr = s[1];
+  if(!Array.isArray(arr)) return `<ul><li>${arr}</li><li>${s[2]}</li></ul>`;
+  return "";
+}
+
+/* corregge la struttura: ogni slide ha 3 bullet fissi nei campi 1-3 quando array,
+   altrimenti campi 1 e 2 come bullet singoli */
+function slideBullets(s){
+  let items;
+  if(Array.isArray(s[1])) items = s[1];
+  else items = [s[1], s[2]];
+  return `<ul>${items.map(x=>`<li>${x}</li>`).join("")}</ul>`;
+}
+
+/* rigenera slides correttamente */
+function clientHTMLFixed(c){
+  const pal = c.pal.map(p=>`
+    <div class="swatch"><div class="col" style="background:${p[0]}"></div>
+    <div class="lbl"><b>${p[1]}</b><small>${p[0].toUpperCase()}</small></div></div>`).join("");
+
+  const slides = c.slides.map((s,i)=>`
+    <div class="slide">
+      <div class="s-top"><span class="s-badge">${String(i+1).padStart(2,"0")} · ${STEPS[i]}</span><h4>${s[0]}</h4></div>
+      ${slideBullets(s)}
+      <div class="vbox"><span>Grafico</span><p>${s[3]}</p></div>
+      <div class="lbox"><b>Layout:</b> ${s[4]}</div>
+    </div>`).join("");
+
+  const swot = `
+    <div class="swot">
+      <div class="sw s"><b>Punti di forza</b><ul>${c.swot.s.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+      <div class="sw w"><b>Debolezze</b><ul>${c.swot.w.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+      <div class="sw o"><b>Opportunità</b><ul>${c.swot.o.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+      <div class="sw t"><b>Minacce</b><ul>${c.swot.t.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+    </div>`;
+
+  const road = `<ul class="road">${c.road.map(r=>`<li><b>${r[0]}</b><span>${r[1]}</span></li>`).join("")}</ul>`;
+
+  return `
+  <div class="acc client" id="cliente-${c.n}">
+    <button class="acc-head client-head" onclick="tog(this)">
+      <span class="c-num">${c.n}</span>
+      <span class="c-info"><strong>${c.name}</strong><small>${c.city} · ${c.sector}</small></span>
+      <span class="chev">›</span>
+    </button>
+    <div class="acc-body"><div class="acc-inner"><div class="acc-pad">
+      <div class="chips">
+        <span class="chip">Obiettivo: ${c.goal}</span>
+        <span class="chip soft">${c.format}</span>
+      </div>
+      <div class="meta-grid">
+        <div class="meta"><span>Settore</span><p>${c.sector}</p></div>
+        <div class="meta"><span>Sede</span><p>${c.addr}, ${c.city}</p></div>
+        <div class="meta"><span>Referente</span><p>${c.ref}</p></div>
+        <div class="meta"><span>Formato</span><p>${c.format}</p></div>
+      </div>
+      <div class="meta" style="margin-top:8px"><span>Contesto 2030</span><p>${c.ctx}</p></div>
+      <div class="h-sez">Palette</div>
+      <div class="pal">${pal}</div>
+      <div class="h-sez">Presentazione aziendale — 10 slide</div>
+      ${slides}
+      <div class="h-sez">Mini SWOT</div>
+      ${swot}
+      <div class="h-sez">Roadmap 2030–2032</div>
+      ${road}
+    </div></div></div>
+  </div>`;
+}
+
+function coppieHTML(){
+  return COPPIE.map((p,i)=>`
+    <div class="acc" id="coppia-${i+1}">
+      <button class="acc-head" onclick="tog(this)">
+        <span class="pair-num">${String(i+1).padStart(2,"0")}</span>
+        <span class="pair-head" style="display:block"><strong>Coppia ${i+1} — ${p.t}</strong><small>${p.s} · Clienti ${p.c[0].n} e ${p.c[1].n}</small></span>
+        <span class="chev">›</span>
+      </button>
+      <div class="acc-body"><div class="acc-inner"><div class="acc-pad" style="padding-top:0">
+        ${p.c.map(c=>clientHTMLFixed(c)).join("")}
+      </div></div></div>
+    </div>`).join("");
+}
+
+function pillsHTML(){
+  let h="";
+  COPPIE.forEach(p=>p.c.forEach(c=>{
+    h+=`<button class="pill" data-n="${c.n}" onclick="gotoClient('${c.n}',this)">${c.n}</button>`;
+  }));
+  return h;
+}
+
+document.getElementById("briefBox").innerHTML = briefHTML();
+document.getElementById("coppie").innerHTML = coppieHTML();
+document.getElementById("pills").innerHTML = pillsHTML();
+
+/* ============================================================
+   INTERAZIONI
+============================================================ */
+function tog(btn){
+  const acc = btn.closest(".acc");
+  acc.classList.toggle("open");
+  if(acc.classList.contains("client")) syncPill(acc.id.replace("cliente-",""), acc.classList.contains("open"));
+}
+
+function syncPill(n, open){
+  document.querySelectorAll(".pill").forEach(p=>{
+    if(p.dataset.n===n) p.classList.toggle("active", open);
+  });
+}
+
+function gotoClient(n, pill){
+  const el = document.getElementById("cliente-"+n);
+  if(!el) return;
+  // apre coppia genitore
+  const pair = el.closest(".acc:not(.client)");
+  if(pair && !pair.classList.contains("open")) pair.classList.add("open");
+  el.classList.add("open");
+  syncPill(n,true);
+  setTimeout(()=>el.scrollIntoView({behavior:"smooth", block:"start"}), 120);
+}
+
+document.getElementById("btnApri").addEventListener("click", ()=>{
+  document.querySelectorAll(".acc").forEach(a=>a.classList.add("open"));
+  document.querySelectorAll(".pill").forEach(p=>p.classList.add("active"));
+});
+document.getElementById("btnChiudi").addEventListener("click", ()=>{
+  document.querySelectorAll(".acc").forEach(a=>a.classList.remove("open"));
+  document.querySelectorAll(".pill").forEach(p=>p.classList.remove("active"));
+});
+</script>
+</body>
+</html>s
